@@ -1,0 +1,57 @@
+<div ng-show="isTeacher()">
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>星期一</th>
+				<th>星期二</th>
+				<th>星期三</th>
+				<th>星期四</th>
+				<th>星期五</th>
+				<th>星期六</th>
+				<th>星期天</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="course in courses">
+				<td>{{$index}}</td>
+				<td><input type="text" style="width:100%" ng-model="course.mon"></td>
+				<td><input type="text" style="width:100%" ng-model="course.tue"></td>
+				<td><input type="text" style="width:100%" ng-model="course.wed"></td>
+				<td><input type="text" style="width:100%" ng-model="course.thur"></td>
+				<td><input type="text" style="width:100%" ng-model="course.fri"></td>
+				<td><input type="text" style="width:100%" ng-model="course.sat"></td>
+				<td><input type="text" style="width:100%" ng-model="course.sun"></td>
+			</tr>
+		</tbody>
+	</table>
+	<hr>
+</div>
+<div>
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>星期一</th>
+				<th>星期二</th>
+				<th>星期三</th>
+				<th>星期四</th>
+				<th>星期五</th>
+				<th>星期六</th>
+				<th>星期天</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="course in courses">
+				<td>{{$index + 1}}</td>
+				<td>{{course.mon}}</td>
+				<td>{{course.tue}}</td>
+				<td>{{course.wed}}</td>
+				<td>{{course.thur}}</td>
+				<td>{{course.fri}}</td>
+				<td>{{course.sat}}</td>
+				<td>{{course.sun}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
