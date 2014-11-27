@@ -1,4 +1,6 @@
 <div ng-show="isTeacher()">
+	<h1>新建家长会</h1>
+	<hr>
 	<form>
 		<div class="form-group">
 			<label class="control-label">家长会时间：</label>
@@ -16,26 +18,30 @@
 		<div class="form-group text-right">
 			<button type="button" class="btn btn-primary">
 				<span class="glyphicon glyphicon-tasks"></span>
-				&nbsp;发布家长会
+				&nbsp;新建家长会
 			</button>
 		</div>
 	</form>
-	<hr>
+	<br><br>
 </div>
-<div class="alert alert-info repeat-item" role="alert" ng-repeat = "meeting in meetings">
-	<p><strong>家长会时间：</strong>{{meeting.time}}</p>
-	<p><strong>家长会地点：</strong>{{meeting.place}}</p>
-	<p><strong>家长会内容：</strong>{{meeting.content}}</h3>
+<div>
+	<h1>查看家长会</h1>
 	<hr>
-	<p class="text-right">
-		<button class="btn btn-sm btn-success">
-			<span class="glyphicon glyphicon-thumbs-up"></span>
-			<strong>{{meeting.agree}}</strong>	
-		</button>
-		&nbsp;&nbsp;
-		<button class="btn btn-sm btn-danger">
-			<span class="glyphicon glyphicon-thumbs-down"></span>
-			<strong>{{meeting.disagree}}</strong>
-		</button>
-	</p>
+	<div class="alert alert-info repeat-item" role="alert" ng-repeat = "meeting in meetings">
+		<p><strong>家长会时间：</strong>{{meeting.time}}</p>
+		<p><strong>家长会地点：</strong>{{meeting.place}}</p>
+		<p><strong>家长会内容：</strong>{{meeting.content}}</p>
+		<hr>
+		<p class="text-right">
+			<button class="btn btn-sm btn-success">
+				<span class="glyphicon glyphicon-thumbs-up"></span>
+				<strong>{{meeting.agree}}</strong>	
+			</button>
+			&nbsp;&nbsp;
+			<button class="btn btn-sm btn-danger">
+				<span class="glyphicon glyphicon-thumbs-down"></span>
+				<strong>{{meeting.disagree}}</strong>
+			</button>
+		</p>
+	</div>
 </div>

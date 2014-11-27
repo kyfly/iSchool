@@ -1,12 +1,15 @@
 <div ng-show="isTeacher()">
+	<h1>选择学生</h1>
+	<hr>
 	<div class="input-group">
 		<span class="input-group-addon glyphicon glyphicon-user"></span>
 		<select class="form-control">
 			<option ng-repeat="stulist in stulists" value="{{stulist.sno}}">{{stulist.sno}} - {{stulist.name}}</option>
 		</select>
 	</div>
-	<br>
-	<h1>登记成绩</h1>
+	<br><br>
+	<h1>录入成绩</h1>
+	<hr>
 	<form>
 		<div class="form-group">
 			<label class="control-label">考试时间：</label>
@@ -27,14 +30,15 @@
 		<div class="form-group text-right">
 			<button type="button" class="btn btn-primary">
 				<span class="glyphicon glyphicon-pencil"></span>
-				&nbsp;确认登记
+				&nbsp;确认提交
 			</button>
 		</div>
 	</form>
-	<hr>
+	<br><br>
 </div>
 <div>
 	<h1>查看成绩</h1>
+	<hr>
 	<div class="input-group">
 		<span class="input-group-addon">
 			<span class="glyphicon glyphicon-search"></span>	

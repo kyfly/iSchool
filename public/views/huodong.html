@@ -1,4 +1,6 @@
 <div ng-show="isTeacher()">
+	<h1>发起活动</h1>
+	<hr>
 	<form>
 		<div class="form-group">
 			<label class="control-label">活动时间：</label>
@@ -20,12 +22,16 @@
 			</button>
 		</div>
 	</form>
-	<hr>
+	<br><br>
 </div>
-<div class="alert alert-info repeat-item" role="alert" ng-repeat = "activity in activities">
-	<p><strong>时间：</strong>{{activity.time}}</p>
-	<p><strong>地点：</strong>{{activity.place}}</p>
-	<p><strong>内容：</strong>{{activity.content}}</h3>
+<div>
+	<h1>查看活动</h1>
 	<hr>
-	<p class="text-right"><strong>{{activity.from}}</strong>&nbsp;发布于&nbsp;<strong>{{activity.datetime}}</strong></p>
+	<div class="alert alert-info repeat-item" role="alert" ng-repeat = "activity in activities">
+		<p><strong>时间：</strong>{{activity.time}}</p>
+		<p><strong>地点：</strong>{{activity.place}}</p>
+		<p><strong>内容：</strong>{{activity.content}}</p>
+		<hr>
+		<p class="text-right"><strong>{{activity.from}}</strong>&nbsp;发布于&nbsp;<strong>{{activity.datetime}}</strong></p>
+	</div>
 </div>

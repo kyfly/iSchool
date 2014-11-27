@@ -1,4 +1,6 @@
 <div ng-show="isTeacher()">
+	<h1>布置作业</h1>
+	<hr>
 	<form>
 		<div class="form-group">
 			<label class="control-label">请老师布置今天作业：</label>
@@ -12,10 +14,14 @@
 			</button>
 		</div>
 	</form>
-	<hr>
+	<br><br>
 </div>
-<div class="alert alert-info repeat-item" role="alert" ng-repeat = "homework in homeworks">
-	<p><strong>作业内容：</strong>{{homework.content}}</h3>
+<div>
+	<h1>查看作业</h1>
 	<hr>
-	<p class="text-right"><strong>{{homework.from}}</strong>&nbsp;发布于&nbsp;<strong>{{homework.datetime}}</strong></p>
+	<div class="alert alert-info repeat-item" role="alert" ng-repeat = "homework in homeworks">
+		<p><strong>作业内容：</strong>{{homework.content}}</p>
+		<hr>
+		<p class="text-right"><strong>{{homework.from}}</strong>&nbsp;发布于&nbsp;<strong>{{homework.datetime}}</strong></p>
+	</div>
 </div>
