@@ -158,8 +158,40 @@ function HuodongCtrl ($scope,seva) {
 	};
 }
 
-function ZiliaoCtrl ($scope) {
-
+function ZiliaoCtrl ($scope,seva) {
+	$scope.personinfos = [
+		{
+			"name":"哈哈",
+			"sex":"男",
+			"birthday":"1994-02-02",
+			"job":"学生",
+			"contact":"13666666666"
+		},
+		{
+			"name":"呵呵",
+			"sex":"女",
+			"birthday":"1995-03-03",
+			"job":"老师",
+			"contact":"12345678910"
+		},
+		{
+			"name":"啦啦",
+			"sex":"女",
+			"birthday":"1993-01-01",
+			"job":"家长",
+			"contact":"15444444444"
+		},
+		{
+			"name":"呜呜",
+			"sex":"男",
+			"birthday":"1996-06-06",
+			"job":"学生",
+			"contact":"11111111111"
+		},
+	];
+	$scope.isTeacher = function(){
+		return seva.usi === 0;
+	};
 }
 
 function LiuyanCtrl ($scope) {
@@ -189,7 +221,6 @@ function LiuyanCtrl ($scope) {
 			"content":"何其芳未公布哦符合无法被解放军阿福~",
 		}
 	];
-	$scope.orderProp = 'time'; 
 }
 
 function TongzhiCtrl ($scope,seva) {
@@ -356,9 +387,17 @@ function NavbarCtrl($scope,seva){
 	var role = ["教师","家长","学生"];
 	$scope.user = {
 		"name":"用户名",
-		"role":role[seva.usi]
+		"role":role[seva.usi],
+		"switchuser":function(){
+			seva.usi++;
+			if(seva.usi >= 3){
+				seva.usi = 0;
+			}
+			$scope.user.role = role[seva.usi];
+		}
 	};
 }
+
 
 function PageLoader($routeProvider){
 	$routeProvider
