@@ -111,10 +111,34 @@ function KechengbiaoCtrl ($scope,seva) {
 
 }
 
-function JiazhanghuiCtrl ($scope) {
-
+function JiazhanghuiCtrl ($scope,seva) {
+	$scope.meetings = [
+		{
+			"content":"这是一个家长会",
+			"time":"2014-09-01",
+			"place":"六教",
+			"agree":"18",
+			"disagree":"21"
+		},
+		{
+			"content":"这也是一个家长会",
+			"time":"2014-09-02",
+			"place":"七教",
+			"agree":"39",
+			"disagree":"0"
+		},
+		{
+			"content":"这还是一个家长会",
+			"time":"2014-09-03",
+			"place":"一教",
+			"agree":"28",
+			"disagree":"11"
+		},
+	];
+	$scope.isTeacher = function() {
+		return seva.usi === 0;
+	};
 }
-
 function HuodongCtrl ($scope,seva) {
 	$scope.activities = [
 		{
@@ -142,14 +166,14 @@ function HuodongCtrl ($scope,seva) {
 			"content":"这是一个活动！这是一个活动！这是一个活动！",
 			"time":"2014-06-01",
 			"place":"行政楼",
-			"from":"李畅",
+			"from":"啦啦啦",
 			"datetime":"2014-12-01"
 		},
 		{
 			"content":"这是一个活动！这是一个活动！",
 			"time":"2014-05-01",
 			"place":"体育馆",
-			"from":"刘建东",
+			"from":"呵呵呵",
 			"datetime":"2014-11-01"
 		}
 	];
@@ -198,13 +222,13 @@ function LiuyanCtrl ($scope) {
 	$scope.comments = [
 		{
 			"from":"马越",
-			"to":"张建海",
+			"to":"啦啦啦",
 			"datetime":"2014-11-14 11:56",
 			"content":"老师你好啊！",
 		},
 		{
 			"from":"尤振飞",
-			"to":"马化龙",
+			"to":"呵呵呵",
 			"datetime":"2014-11-13 10:09",
 			"content":"老师我叫尤振飞！",
 		},
@@ -242,12 +266,12 @@ function TongzhiCtrl ($scope,seva) {
 		},
 		{
 			"content":"这是一条通知！这是一条通知！这是一条通知！",
-			"from":"李畅",
+			"from":"哈哈哈",
 			"datetime":"2014-12-01"
 		},
 		{
 			"content":"这是一条通知！这是一条通知！",
-			"from":"刘建东",
+			"from":"啦啦啦",
 			"datetime":"2014-11-01"
 		}
 	];
