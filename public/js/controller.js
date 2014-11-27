@@ -1,5 +1,121 @@
-function ChengjiCtrl ($scope) {
-
+function ChengjiCtrl ($scope,seva) {
+	$scope.stulists = [
+		{
+			"name":"哈哈哈",
+			"sno":"11111111"
+		},
+		{
+			"name":"呵呵呵",
+			"sno":"12434344"
+		},
+		{
+			"name":"尤振飞",
+			"sno":"16573456"
+		},
+		{
+			"name":"马越",
+			"sno":"12597377"
+		},
+		{
+			"name":"王如锵",
+			"sno":"12464883"
+		}
+	];
+	$scope.courselists = [
+		{
+			"cno":"0",
+			"name":"语文"
+		},
+		{
+			"cno":"1",
+			"name":"数学"
+		},
+		{
+			"cno":"2",
+			"name":"英语"
+		},
+		{
+			"cno":"3",
+			"name":"体育"
+		},
+		{
+			"cno":"4",
+			"name":"常识"
+		},
+		{
+			"cno":"5",
+			"name":"音乐"
+		},
+		{
+			"cno":"6",
+			"name":"美术"
+		}
+	];
+	$scope.grades = [
+		{
+			"term":"一年级上期中",
+			"course":"语文",
+			"grade":"99"
+		},
+		{
+			"term":"一年级下期末",
+			"course":"数学",
+			"grade":"21"
+		},
+		{
+			"term":"二年级上期末",
+			"course":"英语",
+			"grade":"65"
+		},
+		{
+			"term":"二年级下期中",
+			"course":"体育",
+			"grade":"76"
+		},
+		{
+			"term":"三年级上期中",
+			"course":"美术",
+			"grade":"98"
+		},
+		{
+			"term":"三年级下期中",
+			"course":"音乐",
+			"grade":"97"
+		},
+		{
+			"term":"四年级上期末",
+			"course":"语文",
+			"grade":"66"
+		},
+		{
+			"term":"四年级下期末",
+			"course":"数学",
+			"grade":"73"
+		},
+		{
+			"term":"五年级上期中",
+			"course":"音乐",
+			"grade":"88"
+		},
+		{
+			"term":"五年级下期末",
+			"course":"美术",
+			"grade":"100"
+		},
+		{
+			"term":"六年级上期末",
+			"course":"英语",
+			"grade":"97"
+		},
+		{
+			"term":"六年级下期末",
+			"course":"语文",
+			"grade":"87"
+		}
+	];
+	$scope.isTeacher = function(){
+		return seva.usi === 0;
+	};
 }
 
 function ZuoyeCtrl ($scope,seva) {
