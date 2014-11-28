@@ -1,4 +1,7 @@
 <div ng-show="isTeacher()">
+	<h1>录入课程表</h1>
+	<hr>
+	<form>
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
@@ -25,9 +28,18 @@
 			</tr>
 		</tbody>
 	</table>
-	<hr>
+	<div class="text-right">
+		<button type="button" class="btn btn-primary">
+			<span class="glyphicon glyphicon-ok"></span>
+			&nbsp;提交修改
+		</button>
+	</div>
+	</form>
+	<br><br>
 </div>
 <div>
+	<h1>查看课程表</h1>
+	<hr>
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>

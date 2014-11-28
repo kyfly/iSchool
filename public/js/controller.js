@@ -1,5 +1,121 @@
-function ChengjiCtrl ($scope) {
-
+function ChengjiCtrl ($scope,seva) {
+	$scope.stulists = [
+		{
+			"name":"哈哈哈",
+			"sno":"11111111"
+		},
+		{
+			"name":"呵呵呵",
+			"sno":"12434344"
+		},
+		{
+			"name":"尤振飞",
+			"sno":"16573456"
+		},
+		{
+			"name":"马越",
+			"sno":"12597377"
+		},
+		{
+			"name":"王如锵",
+			"sno":"12464883"
+		}
+	];
+	$scope.courselists = [
+		{
+			"cno":"0",
+			"name":"语文"
+		},
+		{
+			"cno":"1",
+			"name":"数学"
+		},
+		{
+			"cno":"2",
+			"name":"英语"
+		},
+		{
+			"cno":"3",
+			"name":"体育"
+		},
+		{
+			"cno":"4",
+			"name":"常识"
+		},
+		{
+			"cno":"5",
+			"name":"音乐"
+		},
+		{
+			"cno":"6",
+			"name":"美术"
+		}
+	];
+	$scope.grades = [
+		{
+			"term":"一年级上期中",
+			"course":"语文",
+			"grade":"99"
+		},
+		{
+			"term":"一年级下期末",
+			"course":"数学",
+			"grade":"21"
+		},
+		{
+			"term":"二年级上期末",
+			"course":"英语",
+			"grade":"65"
+		},
+		{
+			"term":"二年级下期中",
+			"course":"体育",
+			"grade":"76"
+		},
+		{
+			"term":"三年级上期中",
+			"course":"美术",
+			"grade":"98"
+		},
+		{
+			"term":"三年级下期中",
+			"course":"音乐",
+			"grade":"97"
+		},
+		{
+			"term":"四年级上期末",
+			"course":"语文",
+			"grade":"66"
+		},
+		{
+			"term":"四年级下期末",
+			"course":"数学",
+			"grade":"73"
+		},
+		{
+			"term":"五年级上期中",
+			"course":"音乐",
+			"grade":"88"
+		},
+		{
+			"term":"五年级下期末",
+			"course":"美术",
+			"grade":"100"
+		},
+		{
+			"term":"六年级上期末",
+			"course":"英语",
+			"grade":"97"
+		},
+		{
+			"term":"六年级下期末",
+			"course":"语文",
+			"grade":"87"
+		}
+	];
+	$scope.isTeacher = function(){
+		return seva.usi === 0;
+	};
 }
 
 function ZuoyeCtrl ($scope,seva) {
@@ -111,10 +227,34 @@ function KechengbiaoCtrl ($scope,seva) {
 
 }
 
-function JiazhanghuiCtrl ($scope) {
-
+function JiazhanghuiCtrl ($scope,seva) {
+	$scope.meetings = [
+		{
+			"content":"这是一个家长会",
+			"time":"2014-09-01",
+			"place":"六教",
+			"agree":"18",
+			"disagree":"21"
+		},
+		{
+			"content":"这也是一个家长会",
+			"time":"2014-09-02",
+			"place":"七教",
+			"agree":"39",
+			"disagree":"0"
+		},
+		{
+			"content":"这还是一个家长会",
+			"time":"2014-09-03",
+			"place":"一教",
+			"agree":"28",
+			"disagree":"11"
+		},
+	];
+	$scope.isTeacher = function() {
+		return seva.usi === 0;
+	};
 }
-
 function HuodongCtrl ($scope,seva) {
 	$scope.activities = [
 		{
@@ -142,14 +282,14 @@ function HuodongCtrl ($scope,seva) {
 			"content":"这是一个活动！这是一个活动！这是一个活动！",
 			"time":"2014-06-01",
 			"place":"行政楼",
-			"from":"李畅",
+			"from":"啦啦啦",
 			"datetime":"2014-12-01"
 		},
 		{
 			"content":"这是一个活动！这是一个活动！",
 			"time":"2014-05-01",
 			"place":"体育馆",
-			"from":"刘建东",
+			"from":"呵呵呵",
 			"datetime":"2014-11-01"
 		}
 	];
@@ -158,21 +298,53 @@ function HuodongCtrl ($scope,seva) {
 	};
 }
 
-function ZiliaoCtrl ($scope) {
-
+function ZiliaoCtrl ($scope,seva) {
+	$scope.personinfos = [
+		{
+			"name":"哈哈",
+			"sex":"男",
+			"birthday":"1994-02-02",
+			"job":"学生",
+			"contact":"13666666666"
+		},
+		{
+			"name":"呵呵",
+			"sex":"女",
+			"birthday":"1995-03-03",
+			"job":"老师",
+			"contact":"12345678910"
+		},
+		{
+			"name":"啦啦",
+			"sex":"女",
+			"birthday":"1993-01-01",
+			"job":"家长",
+			"contact":"15444444444"
+		},
+		{
+			"name":"呜呜",
+			"sex":"男",
+			"birthday":"1996-06-06",
+			"job":"学生",
+			"contact":"11111111111"
+		},
+	];
+	$scope.isTeacher = function(){
+		return seva.usi === 0;
+	};
 }
 
 function LiuyanCtrl ($scope) {
 	$scope.comments = [
 		{
 			"from":"马越",
-			"to":"张建海",
+			"to":"啦啦啦",
 			"datetime":"2014-11-14 11:56",
 			"content":"老师你好啊！",
 		},
 		{
 			"from":"尤振飞",
-			"to":"马化龙",
+			"to":"呵呵呵",
 			"datetime":"2014-11-13 10:09",
 			"content":"老师我叫尤振飞！",
 		},
@@ -189,7 +361,6 @@ function LiuyanCtrl ($scope) {
 			"content":"何其芳未公布哦符合无法被解放军阿福~",
 		}
 	];
-	$scope.orderProp = 'time'; 
 }
 
 function TongzhiCtrl ($scope,seva) {
@@ -211,12 +382,12 @@ function TongzhiCtrl ($scope,seva) {
 		},
 		{
 			"content":"这是一条通知！这是一条通知！这是一条通知！",
-			"from":"李畅",
+			"from":"哈哈哈",
 			"datetime":"2014-12-01"
 		},
 		{
 			"content":"这是一条通知！这是一条通知！",
-			"from":"刘建东",
+			"from":"啦啦啦",
 			"datetime":"2014-11-01"
 		}
 	];
@@ -356,9 +527,17 @@ function NavbarCtrl($scope,seva){
 	var role = ["教师","家长","学生"];
 	$scope.user = {
 		"name":"用户名",
-		"role":role[seva.usi]
+		"role":role[seva.usi],
+		"switchuser":function(){
+			seva.usi++;
+			if(seva.usi >= 3){
+				seva.usi = 0;
+			}
+			$scope.user.role = role[seva.usi];
+		}
 	};
 }
+
 
 function PageLoader($routeProvider){
 	$routeProvider

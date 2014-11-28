@@ -1,24 +1,32 @@
-<form>
-	<div class="form-group">
-		<label class="control-label">发往：</label>
-      	<input type="email" class="form-control" id="messageTo" placeholder="请输入您要发往的对象">
-	</div>
-	<div class="form-group">
-		<label class="control-label">内容：</label>
-		<textarea class="form-control" maxlength="200" style="resize:none" rows="3">
-		</textarea>
-	</div>
-	<div class="form-group text-right">
-		<button type="button" class="btn btn-primary">
-			<span class="glyphicon glyphicon-comment"></span>
-			&nbsp;发送
-		</button>
-	</div>
-</form>
-<hr>
-<div class="alert alert-info repeat-item" role="alert" ng-repeat = "comment in comments">
-	<p><strong>发往：</strong>{{comment.to}}</p>
-	<p><strong>内容：</strong>{{comment.content}}</p>
+<div>
+	<h1>我要留言</h1>
 	<hr>
-	<p class="text-right"><strong>{{comment.from}}</strong>&nbsp;发布于&nbsp;<strong>{{comment.datetime}}</strong></p>
+	<form>
+		<div class="form-group">
+			<label class="control-label">发往：</label>
+	      	<input type="text" class="form-control" id="messageTo" placeholder="请输入您要发往的对象">
+		</div>
+		<div class="form-group">
+			<label class="control-label">内容：</label>
+			<textarea class="form-control" maxlength="200" style="resize:none" rows="3">
+			</textarea>
+		</div>
+		<div class="form-group text-right">
+			<button type="button" class="btn btn-primary">
+				<span class="glyphicon glyphicon-comment"></span>
+				&nbsp;发送留言
+			</button>
+		</div>
+	</form>
+	<br><br>
+</div>
+<div>
+	<h1>查看留言</h1>
+	<hr>
+	<div class="alert alert-info repeat-item" role="alert" ng-repeat = "comment in comments">
+		<p><strong>发往：</strong>{{comment.to}}</p>
+		<p><strong>内容：</strong>{{comment.content}}</p>
+		<hr>
+		<p class="text-right"><strong>{{comment.from}}</strong>&nbsp;发布于&nbsp;<strong>{{comment.datetime}}</strong></p>
+	</div>
 </div>
