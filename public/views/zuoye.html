@@ -1,27 +1,26 @@
-<div ng-show="isTeacher()">
-	<h1>布置作业</h1>
-	<hr>
-	<form>
-		<div class="form-group">
-			<label class="control-label">请老师布置今天作业：</label>
-			<textarea class="form-control" maxlength="200" style="resize:none" rows="3">
-			</textarea>
+<tabset>
+	<tab heading="布置作业" disabled="!isTeacher()">
+		<br>
+		<form>
+			<div class="form-group">
+				<label class="control-label">请老师布置今天作业：</label>
+				<textarea class="form-control" maxlength="200" style="resize:none" rows="3">
+				</textarea>
+			</div>
+			<div class="form-group text-right">
+				<button type="button" class="btn btn-primary">
+					<span class="glyphicon glyphicon-book"></span>
+					&nbsp;确定布置
+				</button>
+			</div>
+		</form>
+	</tab>
+	<tab heading="查看作业">
+		<br>
+		<div class="alert alert-info repeat-item" role="alert" ng-repeat = "homework in homeworks">
+			<p><strong>作业内容：</strong>{{homework.content}}</p>
+			<hr>
+			<p class="text-right"><strong>{{homework.from}}</strong>&nbsp;发布于&nbsp;<strong>{{homework.datetime}}</strong></p>
 		</div>
-		<div class="form-group text-right">
-			<button type="button" class="btn btn-primary">
-				<span class="glyphicon glyphicon-book"></span>
-				&nbsp;确定布置
-			</button>
-		</div>
-	</form>
-	<br><br>
-</div>
-<div>
-	<h1>查看作业</h1>
-	<hr>
-	<div class="alert alert-info repeat-item" role="alert" ng-repeat = "homework in homeworks">
-		<p><strong>作业内容：</strong>{{homework.content}}</p>
-		<hr>
-		<p class="text-right"><strong>{{homework.from}}</strong>&nbsp;发布于&nbsp;<strong>{{homework.datetime}}</strong></p>
-	</div>
-</div>
+	</tab>
+</tabset>

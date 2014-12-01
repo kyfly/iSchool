@@ -1,69 +1,68 @@
-<div ng-show="isTeacher()">
-	<h1>录入课程表</h1>
-	<hr>
-	<form>
-	<table class="table table-bordered table-hover">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>星期一</th>
-				<th>星期二</th>
-				<th>星期三</th>
-				<th>星期四</th>
-				<th>星期五</th>
-				<th>星期六</th>
-				<th>星期天</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="course in courses">
-				<td>{{$index}}</td>
-				<td><input type="text" style="width:100%" ng-model="course.mon"></td>
-				<td><input type="text" style="width:100%" ng-model="course.tue"></td>
-				<td><input type="text" style="width:100%" ng-model="course.wed"></td>
-				<td><input type="text" style="width:100%" ng-model="course.thur"></td>
-				<td><input type="text" style="width:100%" ng-model="course.fri"></td>
-				<td><input type="text" style="width:100%" ng-model="course.sat"></td>
-				<td><input type="text" style="width:100%" ng-model="course.sun"></td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="text-right">
-		<button type="button" class="btn btn-primary">
-			<span class="glyphicon glyphicon-ok"></span>
-			&nbsp;提交修改
-		</button>
-	</div>
-	</form>
-	<br><br>
-</div>
-<div>
-	<h1>查看课程表</h1>
-	<hr>
-	<table class="table table-bordered table-hover">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>星期一</th>
-				<th>星期二</th>
-				<th>星期三</th>
-				<th>星期四</th>
-				<th>星期五</th>
-				<th>星期六</th>
-				<th>星期天</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="course in courses">
-				<td>{{$index + 1}}</td>
-				<td>{{course.mon}}</td>
-				<td>{{course.tue}}</td>
-				<td>{{course.wed}}</td>
-				<td>{{course.thur}}</td>
-				<td>{{course.fri}}</td>
-				<td>{{course.sat}}</td>
-				<td>{{course.sun}}</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+<tabset>
+	<tab heading="录入课程表" disabled="!isTeacher()">
+		<br>
+		<form>
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>星期一</th>
+					<th>星期二</th>
+					<th>星期三</th>
+					<th>星期四</th>
+					<th>星期五</th>
+					<th>星期六</th>
+					<th>星期天</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="course in courses">
+					<td>{{$index}}</td>
+					<td><input type="text" style="width:100%" ng-model="course.mon"></td>
+					<td><input type="text" style="width:100%" ng-model="course.tue"></td>
+					<td><input type="text" style="width:100%" ng-model="course.wed"></td>
+					<td><input type="text" style="width:100%" ng-model="course.thur"></td>
+					<td><input type="text" style="width:100%" ng-model="course.fri"></td>
+					<td><input type="text" style="width:100%" ng-model="course.sat"></td>
+					<td><input type="text" style="width:100%" ng-model="course.sun"></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="text-right">
+			<button type="button" class="btn btn-primary">
+				<span class="glyphicon glyphicon-ok"></span>
+				&nbsp;提交修改
+			</button>
+		</div>
+		</form>
+	</tab>
+	<tab heading="查看课程表">
+		<br>
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>星期一</th>
+					<th>星期二</th>
+					<th>星期三</th>
+					<th>星期四</th>
+					<th>星期五</th>
+					<th>星期六</th>
+					<th>星期天</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="course in courses">
+					<td>{{$index + 1}}</td>
+					<td>{{course.mon}}</td>
+					<td>{{course.tue}}</td>
+					<td>{{course.wed}}</td>
+					<td>{{course.thur}}</td>
+					<td>{{course.fri}}</td>
+					<td>{{course.sat}}</td>
+					<td>{{course.sun}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</tab>
+</tabset>

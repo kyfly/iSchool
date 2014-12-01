@@ -1,27 +1,26 @@
-<div ng-show="isTeacher()">
-	<h1>新的通知</h1>
-	<hr>
-	<form>
-		<div class="form-group">
-			<label class="control-label">通知内容：</label>
-			<textarea class="form-control" maxlength="200" style="resize:none" rows="3">
-			</textarea>
+<tabset>
+	<tab heading="新的通知" disabled="!isTeacher()">
+		<br>
+		<form>
+			<div class="form-group">
+				<label class="control-label">通知内容：</label>
+				<textarea class="form-control" maxlength="200" style="resize:none" rows="3">
+				</textarea>
+			</div>
+			<div class="form-group text-right">
+				<button type="button" class="btn btn-primary">
+					<span class="glyphicon glyphicon-send"></span>
+					&nbsp;发布通知
+				</button>
+			</div>
+		</form>
+	</tab>
+	<tab heading="查看通知">
+		<br>
+		<div class="alert alert-info repeat-item" role="alert" ng-repeat = "notice in notices">
+			<p>{{notice.content}}</p>
+			<hr>
+			<p class="text-right"><strong>{{notice.from}}</strong>&nbsp;发布于&nbsp;<strong>{{notice.time}}</strong></p>
 		</div>
-		<div class="form-group text-right">
-			<button type="button" class="btn btn-primary">
-				<span class="glyphicon glyphicon-send"></span>
-				&nbsp;发布通知
-			</button>
-		</div>
-	</form>
-	<br><br>
-</div>
-<div>
-	<h1>查看通知</h1>
-	<hr>
-	<div class="alert alert-info repeat-item" role="alert" ng-repeat = "notice in notices">
-		<p>{{notice.content}}</p>
-		<hr>
-		<p class="text-right"><strong>{{notice.from}}</strong>&nbsp;发布于&nbsp;<strong>{{notice.time}}</strong></p>
-	</div>
-</div>
+	</tab>
+</tabset>

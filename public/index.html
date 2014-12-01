@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="/css/custom-style.css"/>
     <link rel="stylesheet" href="/css/custom-animate.css"/>
 	<script src="/lib/jquery-2.1.1.js"></script>
-	<script src="/lib/bootstrap.js"></script>
 	<script src="/lib/angular.js"></script>
+    <script src="/lib/ui-bootstrap-tpls-0.12.0.js"></script>
 	<script src="/lib/angular-animate.js"></script>
     <script src="/lib/angular-route.js"></script>
 	<script src="/js/controller.js"></script>
@@ -46,11 +46,10 @@
         </div>
     </nav>
 	<div class="col-sm-3" ng-controller="SidebarCtrl">
-		<ul class="nav nav-pills nav-stacked">
-            <li ng-repeat="sidebar in sidebars" ng-class="{'active':isActive[$index]}" ng-click="renew($index)">
-                <a href="{{sidebar.url}}" id="{{sidebar.id}}">{{sidebar.display_name}}</a>
-            </li>
-        </ul>
+        <tabset vertical="true" type="pills">
+            <tab ng-repeat="sidebar in sidebars" heading="{{sidebar.display_name}}" id="{{sidebar.id}}" select="redirect(sidebar.url)">
+            </tab>
+        </tabset>
 	</div>
 	<div class="col-sm-9" ng-view>
 	</div>

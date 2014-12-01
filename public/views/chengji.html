@@ -1,67 +1,66 @@
-<div ng-show="isTeacher()">
-	<h1>选择学生</h1>
-	<hr>
-	<div class="input-group">
-		<span class="input-group-addon glyphicon glyphicon-user"></span>
-		<select class="form-control">
-			<option ng-repeat="stulist in stulists" value="{{stulist.sno}}">{{stulist.sno}} - {{stulist.name}}</option>
-		</select>
-	</div>
-	<br><br>
-	<h1>录入成绩</h1>
-	<hr>
-	<form>
-		<div class="form-group">
-			<label class="control-label">考试时间：</label>
-    	  	<input type="text" class="form-control" id="term" placeholder="请输入活动进行的时间">
-		</div>
-		<div class="form-group">
-			<label class="control-label">选择科目：</label>
-			<select class="form-control" id="course">
-				<option ng-repeat="courselist in courselists" value="{{courselist.cno}}">
-					{{courselist.name}}
-				</option>
+<tabset>
+	<tab heading="选择学生" disabled="!isTeacher()">
+		<br>
+		<div class="input-group">
+			<span class="input-group-addon glyphicon glyphicon-user"></span>
+			<select class="form-control">
+				<option ng-repeat="stulist in stulists" value="{{stulist.sno}}">{{stulist.sno}} - {{stulist.name}}</option>
 			</select>
 		</div>
-		<div class="form-group">
-			<label class="control-label">考试成绩：</label>
-    	  	<input type="number" class="form-control" id="grade" placeholder="请输入您要进行的地点">
+	</tab>
+	<tab heading="录入成绩" disabled="!isTeacher()">
+		<br>
+		<form>
+			<div class="form-group">
+				<label class="control-label">考试时间：</label>
+	    	  	<input type="text" class="form-control" id="term" placeholder="请输入活动进行的时间">
+			</div>
+			<div class="form-group">
+				<label class="control-label">选择科目：</label>
+				<select class="form-control" id="course">
+					<option ng-repeat="courselist in courselists" value="{{courselist.cno}}">
+						{{courselist.name}}
+					</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label class="control-label">考试成绩：</label>
+	    	  	<input type="number" class="form-control" id="grade" placeholder="请输入您要进行的地点">
+			</div>
+			<div class="form-group text-right">
+				<button type="button" class="btn btn-primary">
+					<span class="glyphicon glyphicon-pencil"></span>
+					&nbsp;确认提交
+				</button>
+			</div>
+		</form>
+	</tab>
+	<tab heading="查看成绩">
+		<br>
+		<div class="input-group">
+			<span class="input-group-addon">
+				<span class="glyphicon glyphicon-search"></span>	
+			</span>
+			<input type="text" class="form-control" placeholder="请输入关键词搜索……" ng-model="search">
 		</div>
-		<div class="form-group text-right">
-			<button type="button" class="btn btn-primary">
-				<span class="glyphicon glyphicon-pencil"></span>
-				&nbsp;确认提交
-			</button>
-		</div>
-	</form>
-	<br><br>
-</div>
-<div>
-	<h1>查看成绩</h1>
-	<hr>
-	<div class="input-group">
-		<span class="input-group-addon">
-			<span class="glyphicon glyphicon-search"></span>	
-		</span>
-		<input type="text" class="form-control" placeholder="请输入关键词搜索……" ng-model="search">
-	</div>
-	<br>
-	<table class="table table-bordered table-hover">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>考试时间</th>
-					<th>考试科目</th>
-					<th>考试成绩</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="grade in grades | filter:search">
-					<td>{{$index}}</td>
-					<td>{{grade.term}}</td>
-					<td>{{grade.course}}</td>
-					<td>{{grade.grade}}</td>
-				</tr>
-			</tbody>
-	</table>
-</div>
+		<br>
+		<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>考试时间</th>
+						<th>考试科目</th>
+						<th>考试成绩</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="grade in grades | filter:search">
+						<td>{{$index}}</td>
+						<td>{{grade.term}}</td>
+						<td>{{grade.course}}</td>
+						<td>{{grade.grade}}</td>
+					</tr>
+				</tbody>
+		</table>
+	</tab>
+</tabset>

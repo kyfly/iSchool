@@ -1,51 +1,50 @@
-<div ng-show="isTeacher()">
-	<h1>添加资料</h1>
-	<br>
-	<form>
-		<div class="form-group">
-			<label class="control-label">姓名：</label>
-	   	  	<input type="text" class="form-control" id="" placeholder="">
+<tabset>
+	<tab heading="添加资料" disabled="!isTeacher()">
+		<br>
+		<form>
+			<div class="form-group">
+				<label class="control-label">姓名：</label>
+		   	  	<input type="text" class="form-control" id="" placeholder="">
+			</div>
+			<div class="form-group">
+				<label class="control-label">性别：</label>
+		   	  	<input type="text" class="form-control" id="" placeholder="">
+			</div>
+			<div class="form-group">
+				<label class="control-label">生日：</label>
+		   	  	<input type="text" class="form-control" id="" placeholder="">
+			</div>
+			<div class="form-group">
+				<label class="control-label">职业：</label>
+		   	  	<input type="text" class="form-control" id="" placeholder="">
+			</div>
+			<div class="form-group">
+				<label class="control-label">联系信息：</label>
+		   	  	<input type="text" class="form-control" id="" placeholder="">
+			</div>
+			<div class="form-group text-right">
+				<button type="button" class="btn btn-primary">
+					<span class="glyphicon glyphicon-user"></span>
+					&nbsp;添加人员
+				</button>
+			</div>
+		</form>
+	</tab>
+	<tab heading="查看资料">
+		<br>
+		<div class="input-group">
+			<span class="input-group-addon">
+				<span class="glyphicon glyphicon-search"></span>	
+			</span>
+			<input type="text" class="form-control" placeholder="请输入关键词搜索……" ng-model="search">
 		</div>
-		<div class="form-group">
-			<label class="control-label">性别：</label>
-	   	  	<input type="text" class="form-control" id="" placeholder="">
+		<br>
+		<div class="alert alert-info repeat-item" role="alert" ng-repeat = "personinfo in personinfos | filter:search">
+			<p><strong>姓名：</strong>{{personinfo.name}}</p>
+			<p><strong>性别：</strong>{{personinfo.sex}}</p>
+			<p><strong>生日：</strong>{{personinfo.birthday}}</p>
+			<p><strong>职业：</strong>{{personinfo.job}}</p>
+			<p><strong>联系信息：</strong>{{personinfo.contact}}</p>
 		</div>
-		<div class="form-group">
-			<label class="control-label">生日：</label>
-	   	  	<input type="text" class="form-control" id="" placeholder="">
-		</div>
-		<div class="form-group">
-			<label class="control-label">职业：</label>
-	   	  	<input type="text" class="form-control" id="" placeholder="">
-		</div>
-		<div class="form-group">
-			<label class="control-label">联系信息：</label>
-	   	  	<input type="text" class="form-control" id="" placeholder="">
-		</div>
-		<div class="form-group text-right">
-			<button type="button" class="btn btn-primary">
-				<span class="glyphicon glyphicon-user"></span>
-				&nbsp;添加人员
-			</button>
-		</div>
-	</form>
-	<hr>
-</div>
-<div>
-	<h1>查看资料</h1>
-	<br>
-	<div class="input-group">
-		<span class="input-group-addon">
-			<span class="glyphicon glyphicon-search"></span>	
-		</span>
-		<input type="text" class="form-control" placeholder="请输入关键词搜索……" ng-model="search">
-	</div>
-	<br>
-	<div class="alert alert-info repeat-item" role="alert" ng-repeat = "personinfo in personinfos | filter:search">
-		<p><strong>姓名：</strong>{{personinfo.name}}</p>
-		<p><strong>性别：</strong>{{personinfo.sex}}</p>
-		<p><strong>生日：</strong>{{personinfo.birthday}}</p>
-		<p><strong>职业：</strong>{{personinfo.job}}</p>
-		<p><strong>联系信息：</strong>{{personinfo.contact}}</p>
-	</div>
-</div>
+	</tab>
+</tabset>

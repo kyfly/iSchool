@@ -1,47 +1,46 @@
-<div ng-show="isTeacher()">
-	<h1>新建家长会</h1>
-	<hr>
-	<form>
-		<div class="form-group">
-			<label class="control-label">家长会时间：</label>
-    	  	<input type="text" class="form-control" id="messageTo" placeholder="请输入家长会预计进行的时间">
+<tabset>
+	<tab heading="新建家长会" disabled="!isTeacher()">
+		<br>
+		<form>
+			<div class="form-group">
+				<label class="control-label">家长会时间：</label>
+	    	  	<input type="text" class="form-control" id="messageTo" placeholder="请输入家长会预计进行的时间">
+			</div>
+			<div class="form-group">
+				<label class="control-label">家长会地点：</label>
+	    	  	<input type="text" class="form-control" id="messageTo" placeholder="请输入家长会预计进行的地点">
+			</div>
+			<div class="form-group">
+				<label class="control-label">家长会内容：</label>
+				<textarea class="form-control" maxlength="200" style="resize:none" rows="3">
+				</textarea>
+			</div>
+			<div class="form-group text-right">
+				<button type="button" class="btn btn-primary">
+					<span class="glyphicon glyphicon-tasks"></span>
+					&nbsp;新建家长会
+				</button>
+			</div>
+		</form>
+	</tab>
+	<tab heading="查看家长会">
+		<br>
+		<div class="alert alert-info repeat-item" role="alert" ng-repeat = "meeting in meetings">
+			<p><strong>家长会时间：</strong>{{meeting.time}}</p>
+			<p><strong>家长会地点：</strong>{{meeting.place}}</p>
+			<p><strong>家长会内容：</strong>{{meeting.content}}</p>
+			<hr>
+			<p class="text-right">
+				<button class="btn btn-sm btn-success">
+					<span class="glyphicon glyphicon-thumbs-up"></span>
+					<strong>{{meeting.agree}}</strong>	
+				</button>
+				&nbsp;&nbsp;
+				<button class="btn btn-sm btn-danger">
+					<span class="glyphicon glyphicon-thumbs-down"></span>
+					<strong>{{meeting.disagree}}</strong>
+				</button>
+			</p>
 		</div>
-		<div class="form-group">
-			<label class="control-label">家长会地点：</label>
-    	  	<input type="text" class="form-control" id="messageTo" placeholder="请输入家长会预计进行的地点">
-		</div>
-		<div class="form-group">
-			<label class="control-label">家长会内容：</label>
-			<textarea class="form-control" maxlength="200" style="resize:none" rows="3">
-			</textarea>
-		</div>
-		<div class="form-group text-right">
-			<button type="button" class="btn btn-primary">
-				<span class="glyphicon glyphicon-tasks"></span>
-				&nbsp;新建家长会
-			</button>
-		</div>
-	</form>
-	<br><br>
-</div>
-<div>
-	<h1>查看家长会</h1>
-	<hr>
-	<div class="alert alert-info repeat-item" role="alert" ng-repeat = "meeting in meetings">
-		<p><strong>家长会时间：</strong>{{meeting.time}}</p>
-		<p><strong>家长会地点：</strong>{{meeting.place}}</p>
-		<p><strong>家长会内容：</strong>{{meeting.content}}</p>
-		<hr>
-		<p class="text-right">
-			<button class="btn btn-sm btn-success">
-				<span class="glyphicon glyphicon-thumbs-up"></span>
-				<strong>{{meeting.agree}}</strong>	
-			</button>
-			&nbsp;&nbsp;
-			<button class="btn btn-sm btn-danger">
-				<span class="glyphicon glyphicon-thumbs-down"></span>
-				<strong>{{meeting.disagree}}</strong>
-			</button>
-		</p>
-	</div>
-</div>
+	</tab>
+</tabset>
