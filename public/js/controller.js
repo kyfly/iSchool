@@ -334,7 +334,7 @@ function ZiliaoCtrl ($scope,seva) {
 	};
 }
 
-function LiuyanCtrl ($scope) {
+function LiuyanCtrl ($scope,seva) {
 	$scope.comments = [
 		{
 			"from":"马越",
@@ -361,6 +361,9 @@ function LiuyanCtrl ($scope) {
 			"content":"何其芳未公布哦符合无法被解放军阿福~",
 		}
 	];
+	$scope.isTeacher = function(){
+		return seva.usi === 0;
+	};
 }
 
 function TongzhiCtrl ($scope,seva) {
@@ -396,7 +399,7 @@ function TongzhiCtrl ($scope,seva) {
 	};
 }
 
-function SidebarCtrl($scope,seva){
+function SidebarCtrl($scope,seva,$window){
 	var sidebarResource = [
 		//教师边栏
 		[
@@ -514,13 +517,10 @@ function SidebarCtrl($scope,seva){
 		]
 	];
 	$scope.sidebars = sidebarResource[seva.usi];
-	$scope.isActive = [false,false,false,false,false,false,false,false];
-	$scope.renew = function(n){
-		for(var i = 0; i < sidebarResource[seva.usi].length; i++){
-			$scope.isActive[i] = false;
-		}
-		$scope.isActive[n] = true;
+	$scope.redirect = function(href) {
+		$window.location.href = href;
 	}
+
 }
 
 function NavbarCtrl($scope,seva){

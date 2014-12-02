@@ -1,37 +1,36 @@
-<div ng-show="isTeacher()">
-	<h1>发起活动</h1>
-	<hr>
-	<form>
-		<div class="form-group">
-			<label class="control-label">活动时间：</label>
-    	  	<input type="text" class="form-control" id="messageTo" placeholder="请输入活动进行的时间">
+<tabset>
+	<tab heading="发起活动" disabled="!isTeacher()">
+		<br>
+		<form>
+			<div class="form-group">
+				<label class="control-label">活动时间：</label>
+	    	  	<input type="text" class="form-control" id="messageTo" placeholder="请输入活动进行的时间">
+			</div>
+			<div class="form-group">
+				<label class="control-label">活动地点：</label>
+	    	  	<input type="text" class="form-control" id="messageTo" placeholder="请输入您要进行的地点">
+			</div>
+			<div class="form-group">
+				<label class="control-label">活动内容：</label>
+				<textarea class="form-control" maxlength="200" style="resize:none" rows="3">
+				</textarea>
+			</div>
+			<div class="form-group text-right">
+				<button type="button" class="btn btn-primary">
+					<span class="glyphicon glyphicon-map-marker"></span>
+					&nbsp;发起活动
+				</button>
+			</div>
+		</form>
+	</tab>
+	<tab heading="查看活动">
+		<br>
+		<div class="alert alert-info repeat-item" role="alert" ng-repeat = "activity in activities">
+			<p><strong>时间：</strong>{{activity.time}}</p>
+			<p><strong>地点：</strong>{{activity.place}}</p>
+			<p><strong>内容：</strong>{{activity.content}}</p>
+			<hr>
+			<p class="text-right"><strong>{{activity.from}}</strong>&nbsp;发布于&nbsp;<strong>{{activity.datetime}}</strong></p>
 		</div>
-		<div class="form-group">
-			<label class="control-label">活动地点：</label>
-    	  	<input type="text" class="form-control" id="messageTo" placeholder="请输入您要进行的地点">
-		</div>
-		<div class="form-group">
-			<label class="control-label">活动内容：</label>
-			<textarea class="form-control" maxlength="200" style="resize:none" rows="3">
-			</textarea>
-		</div>
-		<div class="form-group text-right">
-			<button type="button" class="btn btn-primary">
-				<span class="glyphicon glyphicon-map-marker"></span>
-				&nbsp;发起活动
-			</button>
-		</div>
-	</form>
-	<br><br>
-</div>
-<div>
-	<h1>查看活动</h1>
-	<hr>
-	<div class="alert alert-info repeat-item" role="alert" ng-repeat = "activity in activities">
-		<p><strong>时间：</strong>{{activity.time}}</p>
-		<p><strong>地点：</strong>{{activity.place}}</p>
-		<p><strong>内容：</strong>{{activity.content}}</p>
-		<hr>
-		<p class="text-right"><strong>{{activity.from}}</strong>&nbsp;发布于&nbsp;<strong>{{activity.datetime}}</strong></p>
-	</div>
-</div>
+	</tab>
+</tabset>
