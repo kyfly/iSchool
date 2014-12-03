@@ -4,12 +4,9 @@
 		<form>
 			<div class="form-group">
 				<label class="control-label">选择学生：</label>
-				<div class="input-group">
-					<span class="input-group-addon glyphicon glyphicon-user"></span>
-					<select class="form-control">
-						<option ng-repeat="stulist in stulists" value="{{stulist.sno}}">{{stulist.sno}} - {{stulist.name}}</option>
-					</select>
-				</div>
+				<select class="form-control">
+					<option ng-repeat="stulist in stulists" value="{{stulist.sno}}">{{stulist.sno}} - {{stulist.name}}</option>
+				</select>
 			</div>
 			<div class="form-group">
 				<label class="control-label">考试时间：</label>
