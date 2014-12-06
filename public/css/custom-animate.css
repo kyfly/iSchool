@@ -4,13 +4,13 @@
 }
 .repeat-item.ng-leave.ng-leave-active, .repeat-item.ng-enter {
 	opacity: 0;
-	left: -200px;
+	left: 200px;
 }
 .repeat-item.ng-enter.ng-enter-active, .repeat-item.ng-leave {
 	opacity: 1;
 	left: 0px;
 }
 .repeat-item.ng-enter-stagger, .repeat-item.ng-leave-stagger {
-	transition-delay:.3s;
+	transition-delay:.5s;
 	transition-duration: 0s;
 }
