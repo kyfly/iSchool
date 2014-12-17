@@ -144,6 +144,9 @@ function ZuoyeCtrl ($scope,seva) {
 	$scope.isTeacher = function(){
 		return seva.usi === 0;
 	};
+	$scope.closeAlert = function(index) {
+		$scope.homeworks.splice(index, 1);
+	};
 }
 
 function KechengbiaoCtrl ($scope,seva) {
@@ -253,6 +256,9 @@ function JiazhanghuiCtrl ($scope,seva) {
 	];
 	$scope.isTeacher = function() {
 		return seva.usi === 0;
+	};	
+	$scope.closeAlert = function(index) {
+		$scope.meetings.splice(index, 1);
 	};
 }
 function HuodongCtrl ($scope,seva) {
@@ -296,6 +302,9 @@ function HuodongCtrl ($scope,seva) {
 	$scope.isTeacher = function(){
 		return seva.usi === 0;
 	};
+	$scope.closeAlert = function(index) {
+		$scope.activities.splice(index, 1);
+	};
 }
 
 function ZiliaoCtrl ($scope,seva) {
@@ -332,6 +341,9 @@ function ZiliaoCtrl ($scope,seva) {
 	$scope.isTeacher = function(){
 		return seva.usi === 0;
 	};
+	$scope.closeAlert = function(index) {
+		$scope.personinfos.splice(index, 1);
+	};
 }
 
 function LiuyanCtrl ($scope,seva) {
@@ -364,6 +376,9 @@ function LiuyanCtrl ($scope,seva) {
 	$scope.isTeacher = function(){
 		return seva.usi === 0;
 	};
+	$scope.closeAlert = function(index) {
+		$scope.comments.splice(index, 1);
+	};
 }
 
 function TongzhiCtrl ($scope,seva) {
@@ -371,31 +386,39 @@ function TongzhiCtrl ($scope,seva) {
 		{
 			"content":"这是一条通知！这是一条通知！这是一条通知！",
 			"from":"马越",
-			"datetime":"2014-03-01"
+			"datetime":"2014-03-01",
+			"type":"info"
 		},
 		{
 			"content":"这是一条通知！这是一条通知！",
 			"from":"王如锵",
-			"datetime":"2014-04-01"
+			"datetime":"2014-04-01",
+			"type":"success"
 		},
 		{
 			"content":"这是一条通知！",
 			"from":"尤振飞",
-			"datetime":"2014-02-01"
+			"datetime":"2014-02-01",
+			"type":"warning"
 		},
 		{
 			"content":"这是一条通知！这是一条通知！这是一条通知！",
 			"from":"哈哈哈",
-			"datetime":"2014-12-01"
+			"datetime":"2014-12-01",
+			"type":"danger"
 		},
 		{
 			"content":"这是一条通知！这是一条通知！",
 			"from":"啦啦啦",
-			"datetime":"2014-11-01"
+			"datetime":"2014-11-01",
+			"type":"info"
 		}
 	];
 	$scope.isTeacher = function(){
 		return seva.usi === 0;
+	};
+	$scope.closeAlert = function(index) {
+		$scope.notices.splice(index, 1);
 	};
 }
 

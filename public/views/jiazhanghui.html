@@ -25,7 +25,7 @@
 	</tab>
 	<tab heading="查看家长会">
 		<br>
-		<div class="alert alert-info repeat-item" role="alert" ng-repeat = "meeting in meetings">
+		<alert ng-repeat="meeting in meetings" type="info" close="closeAlert($index)" class="repeat-item">
 			<p><strong>家长会时间：</strong>{{meeting.time}}</p>
 			<p><strong>家长会地点：</strong>{{meeting.place}}</p>
 			<p><strong>家长会内容：</strong>{{meeting.content}}</p>
@@ -41,6 +41,6 @@
 					<strong>{{meeting.disagree}}</strong>
 				</button>
 			</p>
-		</div>
+		</alert>
 	</tab>
 </tabset>

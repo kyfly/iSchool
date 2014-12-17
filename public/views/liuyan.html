@@ -21,11 +21,11 @@
 	</tab>
 	<tab heading="查看留言">
 		<br>
-		<div class="alert alert-info repeat-item" role="alert" ng-repeat = "comment in comments">
+		<alert ng-repeat="comment in comments" type="info" close="closeAlert($index)" class="repeat-item">
 			<p><strong>发往：</strong>{{comment.to}}</p>
 			<p><strong>内容：</strong>{{comment.content}}</p>
 			<hr>
 			<p class="text-right"><strong>{{comment.from}}</strong>&nbsp;发布于&nbsp;<strong>{{comment.datetime}}</strong></p>
-		</div>
+		</alert>
 	</tab>
 </tabset>

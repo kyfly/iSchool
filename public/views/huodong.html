@@ -25,12 +25,12 @@
 	</tab>
 	<tab heading="查看活动">
 		<br>
-		<div class="alert alert-info repeat-item" role="alert" ng-repeat = "activity in activities">
+		<alert ng-repeat="activity in activities" type="info" close="closeAlert($index)" class="repeat-item">
 			<p><strong>时间：</strong>{{activity.time}}</p>
 			<p><strong>地点：</strong>{{activity.place}}</p>
 			<p><strong>内容：</strong>{{activity.content}}</p>
 			<hr>
 			<p class="text-right"><strong>{{activity.from}}</strong>&nbsp;发布于&nbsp;<strong>{{activity.datetime}}</strong></p>
-		</div>
+		</alert>
 	</tab>
 </tabset>
