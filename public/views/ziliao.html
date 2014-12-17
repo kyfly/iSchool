@@ -39,12 +39,15 @@
 			<input type="text" class="form-control" placeholder="请输入关键词搜索……" ng-model="search">
 		</div>
 		<br>
-		<div class="alert alert-info repeat-item" role="alert" ng-repeat = "personinfo in personinfos | filter:search">
-			<p><strong>姓名：</strong>{{personinfo.name}}</p>
-			<p><strong>性别：</strong>{{personinfo.sex}}</p>
-			<p><strong>生日：</strong>{{personinfo.birthday}}</p>
-			<p><strong>职业：</strong>{{personinfo.job}}</p>
-			<p><strong>联系信息：</strong>{{personinfo.contact}}</p>
+		<div class="col-md-3" ng-repeat="personinfo in personinfos | filter:search">
+			<alert type="info" class="repeat-item">
+				<h3><strong>{{personinfo.name}}</strong></h3>
+				<hr>
+				<p><strong>性别：</strong>{{personinfo.sex}}</p>
+				<p><strong>生日：</strong>{{personinfo.birthday}}</p>
+				<p><strong>职业：</strong>{{personinfo.job}}</p>
+				<p><strong>联系信息：</strong>{{personinfo.contact}}</p>
+			</alert>
 		</div>
 	</tab>
 </tabset>

@@ -144,6 +144,9 @@ function ZuoyeCtrl ($scope,seva) {
 	$scope.isTeacher = function(){
 		return seva.usi === 0;
 	};
+	$scope.closeAlert = function(index) {
+		$scope.homeworks.splice(index, 1);
+	};
 }
 
 function KechengbiaoCtrl ($scope,seva) {
@@ -253,6 +256,9 @@ function JiazhanghuiCtrl ($scope,seva) {
 	];
 	$scope.isTeacher = function() {
 		return seva.usi === 0;
+	};	
+	$scope.closeAlert = function(index) {
+		$scope.meetings.splice(index, 1);
 	};
 }
 function HuodongCtrl ($scope,seva) {
@@ -296,6 +302,9 @@ function HuodongCtrl ($scope,seva) {
 	$scope.isTeacher = function(){
 		return seva.usi === 0;
 	};
+	$scope.closeAlert = function(index) {
+		$scope.activities.splice(index, 1);
+	};
 }
 
 function ZiliaoCtrl ($scope,seva) {
@@ -332,6 +341,9 @@ function ZiliaoCtrl ($scope,seva) {
 	$scope.isTeacher = function(){
 		return seva.usi === 0;
 	};
+	$scope.closeAlert = function(index) {
+		$scope.personinfos.splice(index, 1);
+	};
 }
 
 function LiuyanCtrl ($scope,seva) {
@@ -363,6 +375,9 @@ function LiuyanCtrl ($scope,seva) {
 	];
 	$scope.isTeacher = function(){
 		return seva.usi === 0;
+	};
+	$scope.closeAlert = function(index) {
+		$scope.comments.splice(index, 1);
 	};
 }
 
