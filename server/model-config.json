@@ -1,0 +1,65 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ]
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "student": {
+    "dataSource": "db",
+    "public": true
+  },
+  "grade": {
+    "dataSource": "db",
+    "public": false
+  },
+  "message": {
+    "dataSource": "db",
+    "public": false
+  },
+  "parent": {
+    "dataSource": "db",
+    "public": true
+  },
+  "teacher": {
+    "dataSource": "db",
+    "public": true
+  },
+  "activity": {
+    "dataSource": "db",
+    "public": false
+  },
+  "notice": {
+    "dataSource": "db",
+    "public": false
+  },
+  "homework": {
+    "dataSource": "db",
+    "public": false
+  },
+  "subject": {
+    "dataSource": "db",
+    "public": false
+  }
+}

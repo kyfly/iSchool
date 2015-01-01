@@ -1,0 +1,38 @@
+{
+  "name": "student",
+  "plural": "students",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "mongodb": {
+    "collection": "student"
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "sex": {
+      "type": "number",
+      "required": true
+    },
+    "birthday": {
+      "type": "date"
+    },
+    "updatedAt": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "grades": {
+      "type": "embedsMany",
+      "model": "grade",
+      "option": {
+        "validate": true,
+        "autoId": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": []
+}

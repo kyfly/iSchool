@@ -1,0 +1,19 @@
+{
+  "name": "grade",
+  "plural": "grades",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "mongodb": {
+    "collection": "grade"
+  },
+  "properties": {
+    "score": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}
