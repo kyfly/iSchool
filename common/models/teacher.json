@@ -1,0 +1,62 @@
+{
+  "name": "teacher",
+  "plural": "teachers",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "mongodb": {
+    "collection": "teacher"
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "sex": {
+      "type": "number",
+      "required": true
+    },
+    "birthday": {
+      "type": "date"
+    },
+    "updatedAt": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "activities": {
+      "type": "embedsMany",
+      "model": "activity",
+      "option": {
+        "validate": true,
+        "autoId": true
+      }
+    },
+    "notices": {
+      "type": "embedsMany",
+      "model": "notice",
+      "option": {
+        "validate": true,
+        "autoId": true
+      }
+    },
+    "homeworks": {
+      "type": "embedsMany",
+      "model": "homework",
+      "option": {
+        "validate": true,
+        "autoId": true
+      }
+    },
+    "subjects": {
+      "type": "embedsMany",
+      "model": "subject",
+      "option": {
+        "validate": true,
+        "autoId": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": []
+}

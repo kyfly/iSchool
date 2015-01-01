@@ -1,0 +1,38 @@
+{
+  "name": "parent",
+  "plural": "parents",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "mongodb": {
+    "collection": "parent"
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "sex": {
+      "type": "number",
+      "required": true
+    },
+    "birthday": {
+      "type": "date"
+    },
+    "updatedAt": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "messages": {
+      "type": "embedsMany",
+      "model": "message",
+      "option": {
+        "validate": true,
+        "autoId": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": []
+}

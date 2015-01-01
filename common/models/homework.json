@@ -1,0 +1,19 @@
+{
+  "name": "homework",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "content": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}
