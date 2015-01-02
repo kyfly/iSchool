@@ -230,37 +230,6 @@ function KechengbiaoCtrl ($scope,seva) {
 
 }
 
-function JiazhanghuiCtrl ($scope,seva) {
-	$scope.meetings = [
-		{
-			"content":"这是一个家长会",
-			"time":"2014-09-01",
-			"place":"六教",
-			"agree":"18",
-			"disagree":"21"
-		},
-		{
-			"content":"这也是一个家长会",
-			"time":"2014-09-02",
-			"place":"七教",
-			"agree":"39",
-			"disagree":"0"
-		},
-		{
-			"content":"这还是一个家长会",
-			"time":"2014-09-03",
-			"place":"一教",
-			"agree":"28",
-			"disagree":"11"
-		},
-	];
-	$scope.isTeacher = function() {
-		return seva.usi === 0;
-	};	
-	$scope.closeAlert = function(index) {
-		$scope.meetings.splice(index, 1);
-	};
-}
 function HuodongCtrl ($scope,seva) {
 	$scope.activities = [
 		{
@@ -442,11 +411,6 @@ function SidebarCtrl($scope,seva,$window){
 				"url":"#/kechengbiao",
 			},
 			{
-				"id":"sidebarJiazhanghui",
-				"display_name":"家长会管理",
-				"url":"#/jiazhanghui"
-			},
-			{
 				"id":"sidebarHuodong",
 				"display_name":"活动管理",
 				"url":"#/huodong"
@@ -483,11 +447,6 @@ function SidebarCtrl($scope,seva,$window){
 				"id":"sidebarKechengbiao",
 				"display_name":"小孩课程表",
 				"url":"#/kechengbiao",
-			},
-			{
-				"id":"sidebarJiazhanghui",
-				"display_name":"查看家长会",
-				"url":"#/jiazhanghui"
 			},
 			{
 				"id":"sidebarHuodong",
@@ -575,10 +534,6 @@ function PageLoader($routeProvider){
 		.when('/kechengbiao',{
 			templateUrl:'/views/kechengbiao.html',
 			controller: KechengbiaoCtrl,
-		})
-		.when('/jiazhanghui',{
-			templateUrl:'/views/jiazhanghui.html',
-			controller: JiazhanghuiCtrl,
 		})
 		.when('/huodong',{
 			templateUrl:'/views/huodong.html',
