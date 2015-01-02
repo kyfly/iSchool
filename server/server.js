@@ -19,3 +19,5 @@ app.start = function() {
 if (require.main === module) {
   app.start();
 }
+
+app.use(loopback.static('../client'));
