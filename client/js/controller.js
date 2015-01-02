@@ -596,5 +596,5 @@ function PageLoader($routeProvider){
 			templateUrl:'/views/tongzhi.html',
 			controller: TongzhiCtrl,
 		})
-		.otherwise({redirectTo: ''});
+		.otherwise({redirectTo: '/chengji'});
 }
