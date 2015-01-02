@@ -24,10 +24,10 @@
   },
   "validations": [],
   "relations": {
-    "belongToMyUser":{
-      "type":"belongsTo",
-      "model":"myuser",
-      "foreignKey":"user_id"
+    "belongToMyUser": {
+      "type": "belongsTo",
+      "model": "myuser",
+      "foreignKey": "user_id"
     },
     "messages": {
       "type": "embedsMany",
@@ -38,6 +38,25 @@
       }
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "teacher",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "parent",
+      "permission": "ALLOW"
+    }
+  ],
   "methods": []
 }
