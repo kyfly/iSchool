@@ -1,0 +1,16 @@
+{
+  "name": "myuser",
+  "plural": "myusers",
+  "base": "User",
+  "idInjection": true,
+  "properties": {
+    "type":{
+      "type":"number",
+      "require":true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

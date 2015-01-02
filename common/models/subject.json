@@ -9,7 +9,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "belongToMyUser": {
+      "type": "belongsTo",
+      "model": "myuser",
+      "foreignKey": "user_id"
+    }
+  },
   "acls": [],
   "methods": []
 }

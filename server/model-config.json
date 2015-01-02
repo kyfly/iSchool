@@ -61,5 +61,9 @@
   "subject": {
     "dataSource": "db",
     "public": false
+  },
+  "myuser": {
+    "dataSource": "db",
+    "public": true
   }
 }
