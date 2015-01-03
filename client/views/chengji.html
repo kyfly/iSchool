@@ -4,12 +4,14 @@
 		<form>
 			<div class="form-group">
 				<label class="control-label">选择学生：</label>
-				<select class="form-control" ng-model="nowSno">
-					<option ng-repeat="stulist in stulists" value="{{stulist.sno}}">{{stulist.sno}} - {{stulist.name}}</option>
+				<select class="form-control" ng-model="nowSelectedSno">
+					<option ng-repeat="stulist in stulists" value="{{stulist.id}}">{{stulist.id}} - {{stulist.name}}</option>
 				</select>
 			</div>
+			<hr>
 		</form>
-		<div class="input-group">
+		<label>成绩查询：</label>
+		<div class="input-group">	
 			<span class="input-group-addon">
 				<span class="glyphicon glyphicon-search"></span>	
 			</span>
@@ -20,7 +22,6 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>考试时间</th>
 						<th>考试科目</th>
 						<th>考试成绩</th>
 					</tr>
@@ -28,7 +29,6 @@
 				<tbody>
 					<tr ng-repeat="grade in grades | filter:search">
 						<td>{{$index}}</td>
-						<td>{{grade.term}}</td>
 						<td>{{grade.course}}</td>
 						<td>{{grade.grade}}</td>
 					</tr>
@@ -40,28 +40,25 @@
 		<form>
 			<div class="form-group">
 				<label class="control-label">选择学生：</label>
-				<select class="form-control"  ng-model="nowSno">
-					<option ng-repeat="stulist in stulists" value="{{stulist.sno}}">{{stulist.sno}} - {{stulist.name}}</option>
+				<select class="form-control"  ng-model="nowSelectedSno">
+					<option ng-repeat="stulist in stulists" value="{{stulist.id}}">{{stulist.id}} - {{stulist.name}}</option>
 				</select>
 			</div>
-			<div class="form-group">
-				<label class="control-label">考试日期：</label>
-	    	  	<input type="text" class="form-control" id="term" placeholder="请输入考试的日期">
-			</div>
+			<hr>
 			<div class="form-group">
 				<label class="control-label">选择科目：</label>
-				<select class="form-control" id="course">
-					<option ng-repeat="courselist in courselists" value="{{courselist.cno}}">
+				<select class="form-control" id="course" ng-model="uploadObjectid">
+					<option ng-repeat="courselist in courselists" value="{{courselist.id}}">
 						{{courselist.name}}
 					</option>
 				</select>
 			</div>
 			<div class="form-group">
 				<label class="control-label">考试成绩：</label>
-	    	  	<input type="number" class="form-control" id="grade" placeholder="请输入最终考试成绩">
+	    	  	<input type="number" class="form-control" id="grade" placeholder="请输入最终考试成绩" ng-model="uploadScore">
 			</div>
 			<div class="form-group text-right">
-				<button type="button" class="btn btn-primary">
+				<button ng-click="scoreSubmit()" type="button" class="btn btn-primary">
 					<span class="glyphicon glyphicon-pencil"></span>
 					&nbsp;确认提交
 				</button>

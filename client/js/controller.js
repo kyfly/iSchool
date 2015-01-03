@@ -1,27 +1,47 @@
-function ChengjiCtrl ($scope,seva) {
-	$scope.stulists = [
+function ChengjiCtrl ($scope,$resource,seva) {	
+	var AllStudents = $resource("/students",{access_token:"@access_token"});
+	var SingleStudent = $resource("/students/:stuId",{stuId:"@id",access_token:"@access_token"});
+	var Subjects = $resource(
+			"/teachers/:teaId/subjects",
+			{
+				teaId:"@id",
+				access_token:"@access_token"
+			}
+		);
+	var Grades = $resource(
+		"/students/:stuId/grades",
 		{
-			"name":"哈哈哈",
-			"sno":"11111111"
+			stuId:"@id",
+			access_token:"@access_token"
 		},
 		{
-			"name":"呵呵呵",
-			"sno":"12434344"
-		},
-		{
-			"name":"尤振飞",
-			"sno":"16573456"
-		},
-		{
-			"name":"马越",
-			"sno":"12597377"
-		},
-		{
-			"name":"王如锵",
-			"sno":"12464883"
+			"upload":{
+				method:"POST",
+				params:{
+					score:"@score",
+					id:"@objectid"
+				}
+			}
 		}
-	];
-	$scope.courselists = [
+	);
+	$scope.scoreSubmit = function() {
+		var postGrades = Grades.upload({
+			id:this.nowSelectedSno,
+			access_token:seva.access_token,
+			score:this.uploadScore,
+			objectid:this.uploadObjectid
+		});
+	};
+	if (seva.usi === 0){
+		$scope.stulists = AllStudents.query({
+			access_token:seva.access_token
+		});
+		$scope.courselists = Subjects.query({
+			id:seva.whoami,
+			access_token:seva.access_token
+		});
+		/*
+		$scope.courselists = [
 		{
 			"cno":"0",
 			"name":"语文"
@@ -50,7 +70,54 @@ function ChengjiCtrl ($scope,seva) {
 			"cno":"6",
 			"name":"美术"
 		}
+		];
+		*/
+	}
+	else if (seva.usi === 1){
+		var SingleParent = $resource("/parents/:parId",{parId:"@id",access_token:"@access_token"});
+		var parent = SingleParent.get({
+			id:whoami,
+			access_token:seva.access_token
+		});
+		var mystuid = parent.student;
+		$scope.stulists = [SingleStudent.query({
+			id:mystuid,
+			access_token:seva.access_token
+		})];
+	}
+	else {
+		$scope.stulists = [SingleStudent.query({
+			id:whoami,
+			access_token:seva.access_token
+		})];
+	}
+	/*
+	$scope.stulists = [
+		{
+			"name":"哈哈哈",
+			"sno":"11111111"
+		},
+		{
+			"name":"呵呵呵",
+			"sno":"12434344"
+		},
+		{
+			"name":"尤振飞",
+			"sno":"16573456"
+		},
+		{
+			"name":"马越",
+			"sno":"12597377"
+		},
+		{
+			"name":"王如锵",
+			"sno":"12464883"
+		}
 	];
+	*/
+
+	$scope.grades = Grades.query({id:this.nowSelectedSno,access_token:seva.access_token});
+	/*
 	$scope.grades = [
 		{
 			"term":"一年级上期中",
@@ -113,6 +180,7 @@ function ChengjiCtrl ($scope,seva) {
 			"grade":"87"
 		}
 	];
+	*/
 	$scope.isTeacher = function(){
 		return seva.usi === 0;
 	};
