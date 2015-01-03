@@ -416,11 +416,6 @@ function SidebarCtrl($scope,seva,$window){
 				"url":"#/huodong"
 			},
 			{
-				"id":"sidebarZiliao",
-				"display_name":"资料管理",
-				"url":"#/ziliao"
-			},
-			{
 				"id":"sidebarLiuyan",
 				"display_name":"留言系统",
 				"url":"#/liuyan"
@@ -429,6 +424,11 @@ function SidebarCtrl($scope,seva,$window){
 				"id":"sidebarTongzhi",
 				"display_name":"通知管理",
 				"url":"#/tongzhi"
+			},
+			{
+				"id":"sidebarZiliao",
+				"display_name":"资料管理",
+				"url":"#/ziliao"
 			}
 		],
 		//家长边栏
@@ -462,6 +462,11 @@ function SidebarCtrl($scope,seva,$window){
 				"id":"sidebarTongzhi",
 				"display_name":"查看通知",
 				"url":"#/tongzhi"
+			},
+			{
+				"id":"sidebarZiliao",
+				"display_name":"我的资料",
+				"url":"#/ziliao"
 			}
 		],
 		//学生边栏
@@ -487,14 +492,14 @@ function SidebarCtrl($scope,seva,$window){
 				"url":"#/huodong"
 			},
 			{
-				"id":"sidebarLiuyan",
-				"display_name":"留言系统",
-				"url":"#/liuyan"
-			},
-			{
 				"id":"sidebarTongzhi",
 				"display_name":"查看通知",
 				"url":"#/tongzhi"
+			},
+			{
+				"id":"sidebarZiliao",
+				"display_name":"我的资料",
+				"url":"#/ziliao"
 			}
 		]
 	];

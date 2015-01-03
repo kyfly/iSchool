@@ -1,4 +1,13 @@
 <tabset>
+	<tab heading="查看留言">
+		<br>
+		<alert ng-repeat="comment in comments" type="info" close="closeAlert($index)" class="repeat-item">
+			<p><strong>发往：</strong>{{comment.to}}</p>
+			<p><strong>内容：</strong>{{comment.content}}</p>
+			<hr>
+			<p class="text-right"><strong>{{comment.from}}</strong>&nbsp;发布于&nbsp;<strong>{{comment.datetime}}</strong></p>
+		</alert>
+	</tab>
 	<tab heading="我要留言">
 		<br>
 		<form>
@@ -18,14 +27,5 @@
 				</button>
 			</div>
 		</form>
-	</tab>
-	<tab heading="查看留言">
-		<br>
-		<alert ng-repeat="comment in comments" type="info" close="closeAlert($index)" class="repeat-item">
-			<p><strong>发往：</strong>{{comment.to}}</p>
-			<p><strong>内容：</strong>{{comment.content}}</p>
-			<hr>
-			<p class="text-right"><strong>{{comment.from}}</strong>&nbsp;发布于&nbsp;<strong>{{comment.datetime}}</strong></p>
-		</alert>
 	</tab>
 </tabset>

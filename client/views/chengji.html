@@ -1,39 +1,14 @@
 <tabset>
-	<tab heading="录入成绩" disabled="!isTeacher()">	
+	<tab heading="查看成绩">
 		<br>
 		<form>
 			<div class="form-group">
 				<label class="control-label">选择学生：</label>
-				<select class="form-control">
+				<select class="form-control" ng-model="nowSno">
 					<option ng-repeat="stulist in stulists" value="{{stulist.sno}}">{{stulist.sno}} - {{stulist.name}}</option>
 				</select>
 			</div>
-			<div class="form-group">
-				<label class="control-label">考试时间：</label>
-	    	  	<input type="text" class="form-control" id="term" placeholder="请输入活动进行的时间">
-			</div>
-			<div class="form-group">
-				<label class="control-label">选择科目：</label>
-				<select class="form-control" id="course">
-					<option ng-repeat="courselist in courselists" value="{{courselist.cno}}">
-						{{courselist.name}}
-					</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<label class="control-label">考试成绩：</label>
-	    	  	<input type="number" class="form-control" id="grade" placeholder="请输入您要进行的地点">
-			</div>
-			<div class="form-group text-right">
-				<button type="button" class="btn btn-primary">
-					<span class="glyphicon glyphicon-pencil"></span>
-					&nbsp;确认提交
-				</button>
-			</div>
 		</form>
-	</tab>
-	<tab heading="查看成绩">
-		<br>
 		<div class="input-group">
 			<span class="input-group-addon">
 				<span class="glyphicon glyphicon-search"></span>	
@@ -59,5 +34,38 @@
 					</tr>
 				</tbody>
 		</table>
+	</tab>
+	<tab heading="录入成绩" ng-show="isTeacher()">	
+		<br>
+		<form>
+			<div class="form-group">
+				<label class="control-label">选择学生：</label>
+				<select class="form-control"  ng-model="nowSno">
+					<option ng-repeat="stulist in stulists" value="{{stulist.sno}}">{{stulist.sno}} - {{stulist.name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label class="control-label">考试日期：</label>
+	    	  	<input type="text" class="form-control" id="term" placeholder="请输入考试的日期">
+			</div>
+			<div class="form-group">
+				<label class="control-label">选择科目：</label>
+				<select class="form-control" id="course">
+					<option ng-repeat="courselist in courselists" value="{{courselist.cno}}">
+						{{courselist.name}}
+					</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label class="control-label">考试成绩：</label>
+	    	  	<input type="number" class="form-control" id="grade" placeholder="请输入最终考试成绩">
+			</div>
+			<div class="form-group text-right">
+				<button type="button" class="btn btn-primary">
+					<span class="glyphicon glyphicon-pencil"></span>
+					&nbsp;确认提交
+				</button>
+			</div>
+		</form>
 	</tab>
 </tabset>

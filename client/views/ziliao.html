@@ -1,5 +1,5 @@
 <tabset>
-	<tab heading="添加资料" disabled="!isTeacher()">
+	<tab heading="编辑资料">
 		<br>
 		<form>
 			<div class="form-group">
@@ -30,7 +30,7 @@
 			</div>
 		</form>
 	</tab>
-	<tab heading="查看资料">
+	<tab heading="查看资料"  ng-show="isTeacher()">
 		<br>
 		<div class="input-group">
 			<span class="input-group-addon">
