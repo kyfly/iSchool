@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ui.bootstrap','ngAnimate','ngRoute'])
+var app = angular.module("app", ['ui.bootstrap','ngAnimate','ngRoute','ngResource'])
 
 app.config(["$routeProvider", PageLoader]);
 app.value("seva",{
