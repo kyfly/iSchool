@@ -1,13 +1,24 @@
 function ChengjiCtrl ($scope,$resource,seva) {	
-	var AllStudents = $resource("/students",{access_token:"@access_token"});
-	var SingleStudent = $resource("/students/:stuId",{stuId:"@id",access_token:"@access_token"});
+	var AllStudents = $resource(
+		"/students",
+		{
+			access_token:"@access_token"
+		}
+	);
+	var SingleStudent = $resource(
+		"/students/:stuId",
+		{
+			stuId:"@id",
+			access_token:"@access_token"
+		}
+	);
 	var Subjects = $resource(
-			"/teachers/:teaId/subjects",
-			{
-				teaId:"@id",
-				access_token:"@access_token"
-			}
-		);
+		"/teachers/:teaId/subjects",
+		{
+			teaId:"@id",
+			access_token:"@access_token"
+		}
+	);
 	var Grades = $resource(
 		"/students/:stuId/grades",
 		{
@@ -28,8 +39,10 @@ function ChengjiCtrl ($scope,$resource,seva) {
 		var postGrades = Grades.upload({
 			id:this.nowSelectedSno,
 			access_token:seva.access_token,
-			score:this.uploadScore,
-			objectid:this.uploadObjectid
+			data:{
+				score:this.uploadScore,
+				objectid:this.uploadObjectid
+			}
 		});
 	};
 	if (seva.usi === 0){
@@ -40,175 +53,73 @@ function ChengjiCtrl ($scope,$resource,seva) {
 			id:seva.whoami,
 			access_token:seva.access_token
 		});
-		/*
-		$scope.courselists = [
-		{
-			"cno":"0",
-			"name":"语文"
-		},
-		{
-			"cno":"1",
-			"name":"数学"
-		},
-		{
-			"cno":"2",
-			"name":"英语"
-		},
-		{
-			"cno":"3",
-			"name":"体育"
-		},
-		{
-			"cno":"4",
-			"name":"常识"
-		},
-		{
-			"cno":"5",
-			"name":"音乐"
-		},
-		{
-			"cno":"6",
-			"name":"美术"
-		}
-		];
-		*/
 	}
 	else if (seva.usi === 1){
-		var SingleParent = $resource("/parents/:parId",{parId:"@id",access_token:"@access_token"});
+		var SingleParent = $resource(
+			"/parents/:parId/student",
+			{
+				parId:"@id",
+				access_token:"@access_token"
+			});
 		var parent = SingleParent.get({
 			id:whoami,
 			access_token:seva.access_token
 		});
-		var mystuid = parent.student;
-		$scope.stulists = [SingleStudent.query({
-			id:mystuid,
+		$scope.stulists = [SingleStudent.get({
+			id:parent.id,
 			access_token:seva.access_token
 		})];
 	}
 	else {
-		$scope.stulists = [SingleStudent.query({
+		$scope.stulists = [SingleStudent.get({
 			id:whoami,
 			access_token:seva.access_token
 		})];
 	}
-	/*
-	$scope.stulists = [
-		{
-			"name":"哈哈哈",
-			"sno":"11111111"
-		},
-		{
-			"name":"呵呵呵",
-			"sno":"12434344"
-		},
-		{
-			"name":"尤振飞",
-			"sno":"16573456"
-		},
-		{
-			"name":"马越",
-			"sno":"12597377"
-		},
-		{
-			"name":"王如锵",
-			"sno":"12464883"
-		}
-	];
-	*/
-
-	$scope.grades = Grades.query({id:this.nowSelectedSno,access_token:seva.access_token});
-	/*
-	$scope.grades = [
-		{
-			"term":"一年级上期中",
-			"course":"语文",
-			"grade":"99"
-		},
-		{
-			"term":"一年级下期末",
-			"course":"数学",
-			"grade":"21"
-		},
-		{
-			"term":"二年级上期末",
-			"course":"英语",
-			"grade":"65"
-		},
-		{
-			"term":"二年级下期中",
-			"course":"体育",
-			"grade":"76"
-		},
-		{
-			"term":"三年级上期中",
-			"course":"美术",
-			"grade":"98"
-		},
-		{
-			"term":"三年级下期中",
-			"course":"音乐",
-			"grade":"97"
-		},
-		{
-			"term":"四年级上期末",
-			"course":"语文",
-			"grade":"66"
-		},
-		{
-			"term":"四年级下期末",
-			"course":"数学",
-			"grade":"73"
-		},
-		{
-			"term":"五年级上期中",
-			"course":"音乐",
-			"grade":"88"
-		},
-		{
-			"term":"五年级下期末",
-			"course":"美术",
-			"grade":"100"
-		},
-		{
-			"term":"六年级上期末",
-			"course":"英语",
-			"grade":"97"
-		},
-		{
-			"term":"六年级下期末",
-			"course":"语文",
-			"grade":"87"
-		}
-	];
-	*/
+	$scope.grades = Grades.query({
+		id:this.nowSelectedSno,
+		access_token:seva.access_token
+	});
 	$scope.isTeacher = function(){
 		return seva.usi === 0;
 	};
 }
 
 function ZuoyeCtrl ($scope,seva) {
-	$scope.homeworks = [
+	var Homeworks = $resource(
+		"/teachers/:teaId/homeworks",
 		{
-			"content":"今天没有作业！",
-			"from":"某个老师",
-			"datetime":"2014-06-06"
-		},
-		{
-			"content":"今天没有作业！今天没有作业！今天没有作业！今天没有作业！",
-			"from":"某个老师",
-			"datetime":"2015-06-06"
-		},
-		{
-			"content":"今天没有作业！今天没有作业！今天没有作业！",
-			"from":"某个老师",
-			"datetime":"2014-09-06"
-		},
-		{
-			"content":"今天没有作业！今天没有作业！",
-			"from":"某个老师",
-			"datetime":"2014-07-06"
+			teaId:"@id",
+			access_token:"@access_token"
 		}
-	];
+	);
+	var Teachers = $resource(
+		"/teachers",
+		{
+			filter:{
+				fields:{
+					id:true
+				}
+			},
+			access_token:"@access_token"
+		}
+	);
+	var teachers = Teachers.query();
+	$scope.homeworks = Homeworks.query({
+		id: teachers[0].id,
+		access_token:seva.access_token
+	});
+	$scope.homeworkSubmit = function () {
+		var nowDate = Date();
+		var postHomework = Homeworks.save({
+			id: teachers[0].id,
+			access_token:seva.access_token,
+			data:{
+				date:nowDate.toString(),
+				content:this.uploadContent
+			}
+		});
+	}
 	$scope.isTeacher = function(){
 		return seva.usi === 0;
 	};
