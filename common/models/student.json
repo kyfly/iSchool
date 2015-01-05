@@ -36,7 +36,17 @@
       "type": "belongsTo",
       "model": "myuser",
       "foreignKey": "user_id"
-    }
+    },
+    "belongToParent": {
+      "type": "belongsTo",
+      "model": "parent",
+      "foreignKey": "parent_id"
+    },
+    "belongToTeacher": {
+      "type": "belongsTo",
+      "model": "teacher",
+      "foreignKey": "teacher_id"
+    }      
   },
   "acls": [
     {
