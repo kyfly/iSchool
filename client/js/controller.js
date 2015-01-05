@@ -85,7 +85,7 @@ function ChengjiCtrl ($scope,$resource,seva) {
 	};
 }
 
-function ZuoyeCtrl ($scope,seva) {
+function ZuoyeCtrl ($scope,$resource,seva) {
 	var Homeworks = $resource(
 		"/teachers/:teaId/homeworks",
 		{
@@ -104,15 +104,15 @@ function ZuoyeCtrl ($scope,seva) {
 			access_token:"@access_token"
 		}
 	);
-	var teachers = Teachers.query();
+	$scope.teachers = Teachers.query();
 	$scope.homeworks = Homeworks.query({
-		id: teachers[0].id,
+		id: 0,//this.teachers.id,
 		access_token:seva.access_token
 	});
 	$scope.homeworkSubmit = function () {
 		var nowDate = Date();
 		var postHomework = Homeworks.save({
-			id: teachers[0].id,
+			id: 0,//this.teachers.id,
 			access_token:seva.access_token,
 			data:{
 				date:nowDate.toString(),
