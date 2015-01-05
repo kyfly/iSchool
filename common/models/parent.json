@@ -24,6 +24,11 @@
   },
   "validations": [],
   "relations": {
+    "hasManyStudents":{
+      "type": "hasMany",
+      "model": "student",
+      "foreignKey":"teacher_id"
+    },    
     "belongToMyUser": {
       "type": "belongsTo",
       "model": "myuser",
