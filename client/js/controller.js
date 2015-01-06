@@ -110,12 +110,12 @@ function ZuoyeCtrl ($scope,$resource,seva) {
 		access_token:seva.access_token
 	});
 	$scope.homeworkSubmit = function () {
-		var nowDate = Date();
+		var nowDate = new Date();
 		var postHomework = Homeworks.save({
 			id: 0,//this.teachers.id,
 			access_token:seva.access_token,
 			data:{
-				date:nowDate.toString(),
+				date:nowDate.toISOString(),
 				content:this.uploadContent
 			}
 		});
