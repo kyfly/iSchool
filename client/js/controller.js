@@ -209,7 +209,16 @@ function KechengbiaoCtrl ($scope,seva) {
 
 }
 
-function HuodongCtrl ($scope,seva) {
+function HuodongCtrl ($scope,$resource,seva) {
+	var Activities = $resource(
+		"/teachers/:teaId/activities",
+		{
+			teaId:"@id",
+			access_token:"@access_token"
+		}
+	);
+	$scope.activities = Activities.query();
+	/*
 	$scope.activities = [
 		{
 			"content":"这是一个活动！这是一个活动！这是一个活动！",
@@ -247,6 +256,7 @@ function HuodongCtrl ($scope,seva) {
 			"datetime":"2014-11-01"
 		}
 	];
+	*/
 	$scope.isTeacher = function(){
 		return seva.usi === 0;
 	};
