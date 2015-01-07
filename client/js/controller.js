@@ -1,132 +1,118 @@
-function ChengjiCtrl ($scope,$resource,$cookieStore,seva) {	
+function ChengjiCtrl ($scope,$resource,$cookieStore) {	
 	var AllStudents = $resource(
 		"/api/students",
 		{
-			accessToken:"@accessToken"
+			access_token:"@access_token"
 		}
 	);
 	var SingleStudent = $resource(
 		"/api/students/:stuId",
 		{
 			stuId:"@id",
-			accessToken:"@accessToken"
+			access_token:"@access_token"
 		}
 	);
 	var Subjects = $resource(
 		"/api/teachers/:teaId/subjects",
 		{
 			teaId:"@id",
-			accessToken:"@accessToken"
+			access_token:"@access_token"
 		}
 	);
 	var Grades = $resource(
 		"/api/students/:stuId/grades",
 		{
 			stuId:"@id",
-			accessToken:"@accessToken"
+			access_token:"@access_token"
 		},
 		{
 			"upload":{
 				method:"POST",
 				params:{
-					score:"@score"
+					grade:"@grade"
 				}
 			}
 		}
 	);
-	$scope.scoreSubmit = function() {
+	$scope.gradeSubmit = function() {
 		var postGrades = Grades.upload({
 			id:this.nowSelectedSno,
-			accessToken:$cookieStore.get('accessToken'),
+			access_token:$cookieStore.get('access_token'),
 			data:{
-				score:this.uploadScore,
+				grade:this.uploadGrade,
 			}
 		});
 	};
-	if (seva.usi === 0){
+	if ($cookieStore.get('userType') === 0){
 		$scope.stulists = AllStudents.query({
-			accessToken:$cookieStore.get('accessToken')
+			access_token:$cookieStore.get('access_token')
 		});
 		$scope.courselists = Subjects.query({
-			id:seva.whoami,
-			accessToken:$cookieStore.get('accessToken')
+			id:$cookieStore.get('detailId'),
+			access_token:$cookieStore.get('access_token')
 		});
 	}
-	else if (seva.usi === 1){
+	else if ($cookieStore.get('userType') === 1){
 		var SingleParent = $resource(
 			"/api/parents/:parId/student",
 			{
 				parId:"@id",
-				accessToken:"@accessToken"
+				access_token:"@access_token"
 			});
 		var parent = SingleParent.get({
 			id:whoami,
-			accessToken:$cookieStore.get('accessToken')
+			access_token:$cookieStore.get('access_token')
 		});
 		$scope.stulists = [SingleStudent.get({
 			id:parent.id,
-			accessToken:$cookieStore.get('accessToken')
+			access_token:$cookieStore.get('access_token')
 		})];
 	}
 	else {
 		$scope.stulists = [SingleStudent.get({
 			id:whoami,
-			accessToken:$cookieStore.get('accessToken')
+			access_token:$cookieStore.get('access_token')
 		})];
 	}
 	$scope.grades = Grades.query({
 		id:this.nowSelectedSno,
-		accessToken:$cookieStore.get('accessToken')
+		access_token:$cookieStore.get('access_token')
 	});
 	$scope.isTeacher = function(){
-		return seva.usi === 0;
+		return $cookieStore.get('userType') === 0;
 	};
 }
 
-function ZuoyeCtrl ($scope,$resource,$cookieStore,seva) {
+function ZuoyeCtrl ($scope,$resource,$cookieStore) {
 	var Homeworks = $resource(
 		"/api/teachers/:teaId/homeworks",
 		{
 			teaId:"@id",
-			accessToken:"@accessToken"
+			access_token:"@access_token"
 		}
 	);
-	var Teachers = $resource(
-		"/api/teachers",
-		{
-			filter:{
-				fields:{
-					id:true
-				}
-			},
-			accessToken:"@accessToken"
-		}
-	);
-	$scope.teachers = Teachers.query();
 	$scope.homeworks = Homeworks.query({
-		id: 0,//this.teachers.id,
-		accessToken:$cookieStore.get('accessToken')
+		id: $cookieStore.get("detailId"),
+		access_token:$cookieStore.get('access_token')
 	});
 	$scope.homeworkSubmit = function () {
 		var nowDate = new Date();
 		var postHomework = Homeworks.save({
-			id: 0,//this.teachers.id,
-			accessToken:$cookieStore.get('accessToken'),
-			data:{
-				date:nowDate.toISOString(),
-				content:this.uploadContent
-			}
+			id: $cookieStore.get("detailId"),
+			access_token:$cookieStore.get('access_token'),
+			date:nowDate.toISOString(),
+			content:this.uploadContent
 		});
 	}
 	$scope.isTeacher = function(){
-		return seva.usi === 0;
+		return $cookieStore.get('userType') === 0;
 	};
 	$scope.closeAlert = function(index) {
 		$scope.homeworks.splice(index, 1);
 	};
 }
 
-function KechengbiaoCtrl ($scope,seva) {
+function KechengbiaoCtrl ($scope,$cookieStore) {
 	$scope.courses = [
 		{
 			"mon":"语文",
@@ -202,20 +188,20 @@ function KechengbiaoCtrl ($scope,seva) {
 		}
 	];
 	$scope.isTeacher = function(){
-		return seva.usi === 0;
+		return $cookieStore.get('userType') === 0;
 	};
 
 }
 
-function HuodongCtrl ($scope,$resource,seva) {
+function HuodongCtrl ($scope,$resource,$cookieStore) {
 	var Activities = $resource(
 		"/teachers/:teaId/activities",
 		{
 			teaId:"@id",
-			accessToken:"@accessToken"
+			access_token:"@access_token"
 		}
 	);
-	$scope.activities = Activities.query();
+	//$scope.activities = Activities.query();
 	/*
 	$scope.activities = [
 		{
@@ -256,14 +242,14 @@ function HuodongCtrl ($scope,$resource,seva) {
 	];
 	*/
 	$scope.isTeacher = function(){
-		return seva.usi === 0;
+		return $cookieStore.get('userType') === 0;
 	};
 	$scope.closeAlert = function(index) {
 		$scope.activities.splice(index, 1);
 	};
 }
 
-function ZiliaoCtrl ($scope,seva) {
+function ZiliaoCtrl ($scope,$cookieStore) {
 	$scope.personinfos = [
 		{
 			"name":"哈哈",
@@ -295,14 +281,14 @@ function ZiliaoCtrl ($scope,seva) {
 		},
 	];
 	$scope.isTeacher = function(){
-		return seva.usi === 0;
+		return $cookieStore.get('userType') === 0;
 	};
 	$scope.closeAlert = function(index) {
 		$scope.personinfos.splice(index, 1);
 	};
 }
 
-function LiuyanCtrl ($scope,seva) {
+function LiuyanCtrl ($scope,$cookieStore) {
 	$scope.comments = [
 		{
 			"from":"马越",
@@ -330,14 +316,14 @@ function LiuyanCtrl ($scope,seva) {
 		}
 	];
 	$scope.isTeacher = function(){
-		return seva.usi === 0;
+		return $cookieStore.get('userType') === 0;
 	};
 	$scope.closeAlert = function(index) {
 		$scope.comments.splice(index, 1);
 	};
 }
 
-function TongzhiCtrl ($scope,seva) {
+function TongzhiCtrl ($scope,$cookieStore) {
 	$scope.notices = [
 		{
 			"content":"这是一条通知！这是一条通知！这是一条通知！",
@@ -371,14 +357,14 @@ function TongzhiCtrl ($scope,seva) {
 		}
 	];
 	$scope.isTeacher = function(){
-		return seva.usi === 0;
+		return $cookieStore.get('userType') === 0;
 	};
 	$scope.closeAlert = function(index) {
 		$scope.notices.splice(index, 1);
 	};
 }
 
-function SidebarCtrl($scope,seva,$window){
+function SidebarCtrl($scope,$cookieStore,$window){
 	var sidebarResource = [
 		//教师边栏
 		[
@@ -490,26 +476,30 @@ function SidebarCtrl($scope,seva,$window){
 			}
 		]
 	];
-	$scope.sidebars = sidebarResource[seva.usi];
+	$scope.sidebars = sidebarResource[$cookieStore.get('userType')];
 	$scope.redirect = function(href) {
 		$window.location.href = href;
 	}
 
 }
 
-function NavbarCtrl($scope,seva){
+function NavbarCtrl($scope,$cookieStore,$http){
 	var role = ["教师","家长","学生"];
 	$scope.user = {
-		"name":"用户名",
-		"role":role[seva.usi],
-		"switchuser":function(){
-			seva.usi++;
-			if(seva.usi >= 3){
-				seva.usi = 0;
-			}
-			$scope.user.role = role[seva.usi];
-		}
+		"name":$cookieStore.get('userName'),
+		"role":role[$cookieStore.get('userType')]
 	};
+	$scope.logout = function(){
+		$http.post("/api/myusers/logout?access_token="+$cookieStore.get('access_token'))
+		.success(function(){
+			$cookieStore.remove('userId');
+			$cookieStore.remove('userType');
+			$cookieStore.remove('userName');
+			$cookieStore.remove('detailId');
+			$cookieStore.remove('access_token');
+			window.location = "/login.html";
+		});
+	}
 }
 
 

@@ -8,11 +8,12 @@ login.controller('loginCtrl',['$scope','$http','$cookieStore', function ($scope,
 		};
 		$http.post('/api/myusers/login',this.credentials)
 		.success(function(data){
-			$cookieStore.put('accessToken',data.id);
+			$cookieStore.put('access_token',data.id);
 			$cookieStore.put('userId',data.userId);
 			$http.get('/api/myusers/'+data.userId+'/?access_token='+data.id)
 			.success(function(extradata){
 				$cookieStore.put('userType',extradata.type);
+				$cookieStore.put('userName',extradata.name);
 				if (extradata.type === 0){
 					$http.get('/api/teachers/?access_token='+data.id+'&filter=%7B%22where%22%3A%7B%22user_id%22%3A%22'+data.userId+'%22%7D%7D')
 					.success(function(detaildata){
