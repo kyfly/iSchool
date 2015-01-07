@@ -6,6 +6,10 @@
     "name": {
       "type": "string",
       "required": true
+    },
+    "time": {
+      "type": "object",
+      "required": true
     }
   },
   "validations": [],
