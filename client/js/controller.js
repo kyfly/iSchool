@@ -206,7 +206,8 @@ function HuodongCtrl ($scope,$resource,$cookieStore) {
 		});
 	}
 	$scope.isTeacher = function(){
-		return $cookieStore.get('userType') === 0;
+		var nowType = $cookieStore.get('userType');
+		return nowType === 0 || nowType === 1;
 	};
 	$scope.closeAlert = function(index) {
 		$scope.activities.splice(index, 1);
