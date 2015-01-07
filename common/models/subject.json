@@ -6,16 +6,14 @@
     "name": {
       "type": "string",
       "required": true
+    },
+    "time": {
+      "type": "object",
+      "required": true
     }
   },
   "validations": [],
-  "relations": {
-    "belongToMyUser": {
-      "type": "belongsTo",
-      "model": "myuser",
-      "foreignKey": "user_id"
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": []
 }
