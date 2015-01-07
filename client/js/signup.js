@@ -7,8 +7,7 @@ signup.controller('signupCtrl',['$scope','$http',function ($scope,$http) {
 			email:this.inputEmail,
 			password:this.inputPassword,
 			username:this.inputName
-		}
-		console.log(this.upload);
+		};
 		$http.post('/api/myusers',this.upload)
 		.success(function(data){
 			window.location = '/login.html';

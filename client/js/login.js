@@ -5,7 +5,7 @@ login.controller('loginCtrl',['$scope','$http','$cookieStore', function ($scope,
 		this.credentials = {
 			email:this.inputEmail,
 			password:this.inputPassword
-		}
+		};
 		$http.post('/api/myusers/login',this.credentials)
 		.success(function(data){
 			$cookieStore.put('access_token',data.id);
