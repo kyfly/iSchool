@@ -1,0 +1,68 @@
+<!DOCTYPE>
+<html ng-app="signup">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="/css/custom-style.css"/>
+	<script src="/lib/angular/angular.min.js"></script>
+	<script src="/lib/angular-components/angular-cookies.min.js"></script>
+	<script src="/js/signup.js"></script>
+	<title>小学校园信息发布系统</title>
+	<!--[if lt IE 9]>
+	<script>
+		document.write('<h2>您的浏览器版本过低</h2><p>本网站不支持IE8及以下版本，请更换浏览器！</p><p>若已使用高版本浏览器，请关闭兼容模式。</p>');
+		document.execCommand("stop");
+	</script>
+	<![endif]-->
+</head>
+<body class="myft">
+<div class="container" ng-controller="signupCtrl">
+	<div class="text-center">
+		<br><br>
+		<h1><strong>小学校园信息发布系统</strong></h1>
+		<h3>用户注册</h3>
+	</div>
+	<hr>
+	<div class="col-md-offset-2 col-md-8 col-sm-12 well well-lg">
+		<form class="form-horizontal" role="form">
+			<br>
+			<div class="form-group">
+				<label for="inputEmail" class="col-sm-4 control-label">邮箱</label>
+				<div class="col-sm-6">
+					<input type="email" class="form-control" id="inputEmail" ng-model="inputEmail" placeholder="请输入您的帐号">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputPassword" class="col-sm-4 control-label">密码</label>
+				<div class="col-sm-6">
+					<input type="password" class="form-control" id="inputPassword" ng-model="inputPassword" placeholder="请输入密码">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="inputName" class="col-sm-4 control-label">姓名</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" id="inputName" ng-model="inputName" placeholder="请输入您的姓名">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputType" class="col-sm-4 control-label">角色</label>
+				<div class="col-sm-6">
+					<select class="form-control" id="inputType" ng-model="inputType" >
+						<option value="0">教师</option>
+						<option value="1">家长</option>
+						<option value="2">学生</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-4 col-sm-2">
+					<button class="btn btn-primary btn-block" ng-click="signup()">注册</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+</body>
+</html>
