@@ -12,11 +12,13 @@ login.controller('loginCtrl',['$scope','$http','$cookieStore', function ($scope,
 			$cookieStore.put('userId',data.userId);
 			$http.get('/api/myusers/'+data.userId+'/?access_token='+data.id)
 			.success(function(extradata){
+				console.log(extradata);
 				$cookieStore.put('userType',extradata.type);
 				$cookieStore.put('userName',extradata.name);
 				if (extradata.type === 0){
 					$http.get('/api/teachers/?access_token='+data.id+'&filter=%7B%22where%22%3A%7B%22user_id%22%3A%22'+data.userId+'%22%7D%7D')
 					.success(function(detaildata){
+						console.log(detaildata);
 						$cookieStore.put('detailId',detaildata[0].id);
 					});
 				}

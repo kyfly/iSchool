@@ -12,13 +12,6 @@ function ChengjiCtrl ($scope,$resource,$cookieStore) {
 			access_token:"@access_token"
 		}
 	);
-	var Subjects = $resource(
-		"/api/teachers/:teaId/subjects",
-		{
-			teaId:"@id",
-			access_token:"@access_token"
-		}
-	);
 	var Grades = $resource(
 		"/api/students/:stuId/grades",
 		{
@@ -47,10 +40,9 @@ function ChengjiCtrl ($scope,$resource,$cookieStore) {
 		$scope.stulists = AllStudents.query({
 			access_token:$cookieStore.get('access_token')
 		});
-		$scope.courselists = Subjects.query({
-			id:$cookieStore.get('detailId'),
-			access_token:$cookieStore.get('access_token')
-		});
+		$scope.courselists = [
+			"语文","数学","英语","科学","音乐","美术"
+		];
 	}
 	else if ($cookieStore.get('userType') === 1){
 		var SingleParent = $resource(
@@ -85,21 +77,20 @@ function ChengjiCtrl ($scope,$resource,$cookieStore) {
 
 function ZuoyeCtrl ($scope,$resource,$cookieStore) {
 	var Homeworks = $resource(
-		"/api/teachers/:teaId/homeworks",
+		"/api/teachers/:id/homeworks",
 		{
-			teaId:"@id",
-			access_token:"@access_token"
+			id:$cookieStore.get("detailId"),
+			access_token:$cookieStore.get('access_token')
 		}
 	);
-	$scope.homeworks = Homeworks.query({
-		id: $cookieStore.get("detailId"),
-		access_token:$cookieStore.get('access_token')
-	});
+	$scope.homeworks = Homeworks.query();
 	$scope.homeworkSubmit = function () {
 		var nowDate = new Date();
 		var postHomework = Homeworks.save({
-			id: $cookieStore.get("detailId"),
-			access_token:$cookieStore.get('access_token'),
+			date:nowDate.toISOString(),
+			content:this.uploadContent
+		});
+		this.homeworks.push({
 			date:nowDate.toISOString(),
 			content:this.uploadContent
 		});
@@ -195,52 +186,25 @@ function KechengbiaoCtrl ($scope,$cookieStore) {
 
 function HuodongCtrl ($scope,$resource,$cookieStore) {
 	var Activities = $resource(
-		"/teachers/:teaId/activities",
+		"/api/teachers/:id/activities",
 		{
-			teaId:"@id",
-			access_token:"@access_token"
+			id:$cookieStore.get("detailId"),
+			access_token:$cookieStore.get('access_token')
 		}
 	);
-	//$scope.activities = Activities.query();
-	/*
-	$scope.activities = [
-		{
-			"content":"这是一个活动！这是一个活动！这是一个活动！",
-			"time":"2014-09-01",
-			"place":"六教",
-			"from":"马越",
-			"datetime":"2014-03-01"
-		},
-		{
-			"content":"这是一个活动！这是一个活动！",
-			"time":"2014-01-01",
-			"place":"七教",
-			"from":"王如锵",
-			"datetime":"2014-04-01"
-		},
-		{
-			"content":"这是一个活动！",
-			"time":"2014-03-01",
-			"place":"学生活动中心",
-			"from":"尤振飞",
-			"datetime":"2014-02-01"
-		},
-		{
-			"content":"这是一个活动！这是一个活动！这是一个活动！",
-			"time":"2014-06-01",
-			"place":"行政楼",
-			"from":"啦啦啦",
-			"datetime":"2014-12-01"
-		},
-		{
-			"content":"这是一个活动！这是一个活动！",
-			"time":"2014-05-01",
-			"place":"体育馆",
-			"from":"呵呵呵",
-			"datetime":"2014-11-01"
-		}
-	];
-	*/
+	$scope.activities = Activities.query();
+	$scope.activitySubmit = function () {
+		var postActivity = Activities.save({
+			date:this.inputDate,
+			place:this.inputPlace,
+			content:this.inputContent
+		});
+		this.activities.push({
+			date:this.inputDate,
+			place:this.inputPlace,
+			content:this.inputContent
+		});
+	}
 	$scope.isTeacher = function(){
 		return $cookieStore.get('userType') === 0;
 	};
@@ -249,46 +213,37 @@ function HuodongCtrl ($scope,$resource,$cookieStore) {
 	};
 }
 
-function ZiliaoCtrl ($scope,$cookieStore) {
-	$scope.personinfos = [
+function ZiliaoCtrl ($scope,$resource,$cookieStore) {
+	var Profiles = $resource(
+		"/api/myusers/:id",
 		{
-			"name":"哈哈",
-			"sex":"男",
-			"birthday":"1994-02-02",
-			"job":"学生",
-			"contact":"13666666666"
+			id:$cookieStore.get('userId'),
+			access_token:$cookieStore.get('access_token')
 		},
 		{
-			"name":"呵呵",
-			"sex":"女",
-			"birthday":"1995-03-03",
-			"job":"老师",
-			"contact":"12345678910"
-		},
-		{
-			"name":"啦啦",
-			"sex":"女",
-			"birthday":"1993-01-01",
-			"job":"家长",
-			"contact":"15444444444"
-		},
-		{
-			"name":"呜呜",
-			"sex":"男",
-			"birthday":"1996-06-06",
-			"job":"学生",
-			"contact":"11111111111"
-		},
-	];
-	$scope.isTeacher = function(){
-		return $cookieStore.get('userType') === 0;
-	};
-	$scope.closeAlert = function(index) {
-		$scope.personinfos.splice(index, 1);
-	};
+			update:{
+				method:'PUT',
+				success:function(){
+					alert("成功！");
+				},
+				error:function(){
+					alert("失败！");
+				}
+			}
+		}
+	);
+	$scope.profiles = Profiles.get();
+	$scope.updateProfile = function () {
+		var updatePf = Profiles.update({
+			sex:this.profiles.sex,
+			name:this.profiles.name,
+			email:this.profiles.email
+		});
+	}
 }
 
 function LiuyanCtrl ($scope,$cookieStore) {
+	
 	$scope.comments = [
 		{
 			"from":"马越",
@@ -323,39 +278,26 @@ function LiuyanCtrl ($scope,$cookieStore) {
 	};
 }
 
-function TongzhiCtrl ($scope,$cookieStore) {
-	$scope.notices = [
+function TongzhiCtrl ($scope,$resource,$cookieStore) {
+	var Notices = $resource(
+		"/api/teachers/:id/notices",
 		{
-			"content":"这是一条通知！这是一条通知！这是一条通知！",
-			"from":"马越",
-			"datetime":"2014-03-01",
-			"type":"info"
-		},
-		{
-			"content":"这是一条通知！这是一条通知！",
-			"from":"王如锵",
-			"datetime":"2014-04-01",
-			"type":"success"
-		},
-		{
-			"content":"这是一条通知！",
-			"from":"尤振飞",
-			"datetime":"2014-02-01",
-			"type":"warning"
-		},
-		{
-			"content":"这是一条通知！这是一条通知！这是一条通知！",
-			"from":"哈哈哈",
-			"datetime":"2014-12-01",
-			"type":"danger"
-		},
-		{
-			"content":"这是一条通知！这是一条通知！",
-			"from":"啦啦啦",
-			"datetime":"2014-11-01",
-			"type":"info"
+			id:$cookieStore.get("detailId"),
+			access_token:$cookieStore.get('access_token')
 		}
-	];
+	);
+	$scope.notices = Notices.query();
+	$scope.noticeSubmit = function () {
+		var nowDate = new Date();
+		var postNotices = Notices.save({
+			date:nowDate.toISOString(),
+			content:this.inputContent
+		});
+		this.notices.push({
+			date:nowDate.toISOString(),
+			content:this.inputContent
+		});
+	}
 	$scope.isTeacher = function(){
 		return $cookieStore.get('userType') === 0;
 	};
@@ -400,7 +342,7 @@ function SidebarCtrl($scope,$cookieStore,$window){
 			},
 			{
 				"id":"sidebarZiliao",
-				"display_name":"资料管理",
+				"display_name":"我的资料",
 				"url":"#/ziliao"
 			}
 		],

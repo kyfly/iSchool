@@ -1,12 +1,10 @@
 <tabset>
 	<tab heading="查看活动">
 		<br>
-		<alert ng-repeat="activity in activities" type="info" close="closeAlert($index)" class="repeat-item">
-			<p><strong>时间：</strong>{{activity.time}}</p>
+		<alert ng-repeat="activity in activities" type="success" close="closeAlert($index)" class="repeat-item">
+			<p><strong>时间：</strong>{{activity.date}}</p>
 			<p><strong>地点：</strong>{{activity.place}}</p>
 			<p><strong>内容：</strong>{{activity.content}}</p>
-			<hr>
-			<p class="text-right"><strong>{{activity.from}}</strong>&nbsp;发布于&nbsp;<strong>{{activity.datetime}}</strong></p>
 		</alert>
 	</tab>
 	<tab heading="发起活动" ng-show="isTeacher()">
@@ -14,19 +12,19 @@
 		<form>
 			<div class="form-group">
 				<label class="control-label">活动时间：</label>
-	    	  	<input type="text" class="form-control" id="messageTo" placeholder="请输入活动进行的时间">
+	    	  	<input type="text" class="form-control" id="inputDate" ng-model="inputDate" placeholder="请输入活动进行的时间">
 			</div>
 			<div class="form-group">
 				<label class="control-label">活动地点：</label>
-	    	  	<input type="text" class="form-control" id="messageTo" placeholder="请输入您要进行的地点">
+	    	  	<input type="text" class="form-control" id="inputPlace" ng-model="inputPlace" placeholder="请输入您要进行的地点">
 			</div>
 			<div class="form-group">
 				<label class="control-label">活动内容：</label>
-				<textarea class="form-control" maxlength="200" style="resize:none" rows="3">
+				<textarea class="form-control" maxlength="200" ng-model="inputContent" style="resize:none" rows="3">
 				</textarea>
 			</div>
 			<div class="form-group text-right">
-				<button type="button" class="btn btn-primary">
+				<button type="button" class="btn btn-primary" ng-click="activitySubmit()">
 					<span class="glyphicon glyphicon-map-marker"></span>
 					&nbsp;发起活动
 				</button>

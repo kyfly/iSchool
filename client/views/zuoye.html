@@ -1,7 +1,7 @@
 <tabset>
 	<tab heading="查看作业">
 		<br>
-		<alert ng-repeat="homework in homeworks" type="info" close="closeAlert($index)" class="repeat-item">
+		<alert ng-repeat="homework in homeworks" type="danger" close="closeAlert($index)" class="repeat-item">
 			<p><strong>作业内容：</strong>{{homework.content}}</p>
 			<hr>
 			<p class="text-right">发布于&nbsp;<strong>{{homework.date}}</strong></p>
