@@ -1,9 +1,10 @@
 module.exports = function(Parent) {
     Parent.messages = function(cb) {
-        Parent.app.models.Parent.find({fields: {_messages: true}}, function(err, result){
+        Parent.app.models.Parent.find({fields: {_messages: true, id: true}}, function(err, result){
             var msgList = [];
             result.forEach(function(msgs){
                 msgs.__data._messages.forEach(function(msg){
+                    msg.parent_id = msgs.__data.id;
                     msgList.push(msg);
                 })
             });
