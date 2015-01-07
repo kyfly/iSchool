@@ -74,6 +74,13 @@
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW"
+    },
+    {
+      "property": "getAllTeachers",
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
     }
   ],
   "methods": []
