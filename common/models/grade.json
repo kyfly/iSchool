@@ -7,8 +7,12 @@
     "collection": "grade"
   },
   "properties": {
-    "score": {
+    "grade": {
       "type": "number",
+      "required": true
+    },
+    "subject": {
+      "type": "string",
       "required": true
     }
   },

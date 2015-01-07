@@ -20,7 +20,9 @@ module.exports = function (Myuser) {
             case 2:
                 name = "student";
                 Myuser.app.models.Student.create({
-                    user_id: affectedModelInstance.id
+                    user_id: affectedModelInstance.id,
+                    teacher_id: ctx.req.body.teacher_id,
+                    parent_id: ctx.req.body.parent_id
                 });
                 break;
         }
