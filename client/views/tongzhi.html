@@ -1,5 +1,13 @@
 <tabset>
-	<tab heading="新的通知" disabled="!isTeacher()">
+	<tab heading="查看通知">
+		<br>
+		<alert ng-repeat="notice in notices" type="{{notice.type}}" close="closeAlert($index)" class="repeat-item">
+			<p>{{notice.content}}</p>
+			<hr>
+			<p class="text-right"><strong>{{notice.from}}</strong>&nbsp;发布于&nbsp;<strong>{{notice.datetime}}</strong></p>
+		</alert>
+	</tab>
+	<tab heading="新的通知" ng-show="isTeacher()">
 		<br>
 		<form>
 			<div class="form-group">
@@ -14,13 +22,5 @@
 				</button>
 			</div>
 		</form>
-	</tab>
-	<tab heading="查看通知">
-		<br>
-		<alert ng-repeat="notice in notices" type="{{notice.type}}" close="closeAlert($index)" class="repeat-item">
-			<p>{{notice.content}}</p>
-			<hr>
-			<p class="text-right"><strong>{{notice.from}}</strong>&nbsp;发布于&nbsp;<strong>{{notice.datetime}}</strong></p>
-		</alert>
 	</tab>
 </tabset>

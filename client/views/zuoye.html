@@ -1,26 +1,26 @@
 <tabset>
-	<tab heading="布置作业" disabled="!isTeacher()">
-		<br>
-		<form>
-			<div class="form-group">
-				<label class="control-label">请老师布置今天作业：</label>
-				<textarea class="form-control" maxlength="200" style="resize:none" rows="3">
-				</textarea>
-			</div>
-			<div class="form-group text-right">
-				<button type="button" class="btn btn-primary">
-					<span class="glyphicon glyphicon-book"></span>
-					&nbsp;确定布置
-				</button>
-			</div>
-		</form>
-	</tab>
 	<tab heading="查看作业">
 		<br>
 		<alert ng-repeat="homework in homeworks" type="info" close="closeAlert($index)" class="repeat-item">
 			<p><strong>作业内容：</strong>{{homework.content}}</p>
 			<hr>
-			<p class="text-right"><strong>{{homework.from}}</strong>&nbsp;发布于&nbsp;<strong>{{homework.datetime}}</strong></p>
+			<p class="text-right">发布于&nbsp;<strong>{{homework.date}}</strong></p>
 		</alert>
+	</tab>
+	<tab heading="布置作业" ng-show="isTeacher()">
+		<br>
+		<form>
+			<div class="form-group">
+				<label class="control-label">请老师布置今天作业：</label>
+				<textarea class="form-control" maxlength="200" style="resize:none" rows="3" ng-model="uploadContent">
+				</textarea>
+			</div>
+			<div class="form-group text-right">
+				<button type="button" class="btn btn-primary" ng-click="homeworkSubmit()">
+					<span class="glyphicon glyphicon-book"></span>
+					&nbsp;确定布置
+				</button>
+			</div>
+		</form>
 	</tab>
 </tabset>

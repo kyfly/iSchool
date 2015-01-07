@@ -1,5 +1,34 @@
 <tabset>
-	<tab heading="录入课程表" disabled="!isTeacher()">
+	<tab heading="查看课程表">
+		<br>
+		<table class="table table-bordered table-strip">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>星期一</th>
+					<th>星期二</th>
+					<th>星期三</th>
+					<th>星期四</th>
+					<th>星期五</th>
+					<th>星期六</th>
+					<th>星期天</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="course in courses">
+					<td>{{$index + 1}}</td>
+					<td>{{course.mon}}</td>
+					<td>{{course.tue}}</td>
+					<td>{{course.wed}}</td>
+					<td>{{course.thur}}</td>
+					<td>{{course.fri}}</td>
+					<td>{{course.sat}}</td>
+					<td>{{course.sun}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</tab>
+	<tab heading="录入课程表" ng-show="isTeacher()">
 		<br>
 		<form>
 		<table class="table table-bordered table-hover">
@@ -35,34 +64,5 @@
 			</button>
 		</div>
 		</form>
-	</tab>
-	<tab heading="查看课程表">
-		<br>
-		<table class="table table-bordered table-strip">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>星期一</th>
-					<th>星期二</th>
-					<th>星期三</th>
-					<th>星期四</th>
-					<th>星期五</th>
-					<th>星期六</th>
-					<th>星期天</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="course in courses">
-					<td>{{$index + 1}}</td>
-					<td>{{course.mon}}</td>
-					<td>{{course.tue}}</td>
-					<td>{{course.wed}}</td>
-					<td>{{course.thur}}</td>
-					<td>{{course.fri}}</td>
-					<td>{{course.sat}}</td>
-					<td>{{course.sun}}</td>
-				</tr>
-			</tbody>
-		</table>
 	</tab>
 </tabset>
