@@ -48,8 +48,8 @@
 			<div class="form-group">
 				<label class="control-label">选择科目：</label>
 				<select class="form-control" id="course" ng-model="uploadObjectid">
-					<option ng-repeat="courselist in courselists" value="{{courselist.id}}">
-						{{courselist.name}}
+					<option ng-repeat="courselist in courselists" value="{{$index}}">
+						{{courselist}}
 					</option>
 				</select>
 			</div>
