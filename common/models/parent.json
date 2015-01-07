@@ -7,17 +7,6 @@
     "collection": "parent"
   },
   "properties": {
-    "name": {
-      "type": "string",
-      "required": true
-    },
-    "sex": {
-      "type": "number",
-      "required": true
-    },
-    "birthday": {
-      "type": "date"
-    },
     "updatedAt": {
       "type": "date"
     }

@@ -7,6 +7,11 @@ var app = module.exports = loopback();
 // Sub-apps like REST API are mounted via boot scripts.
 boot(app, __dirname);
 
+app.use(function(req,res,next){
+  res.setHeader('X-Powered-By', 'Kyfly');
+  next();
+});
+
 app.start = function() {
   // start the web server
   return app.listen(function() {
@@ -19,5 +24,4 @@ app.start = function() {
 if (require.main === module) {
   app.start();
 }
-
 app.use(loopback.static('../client'));

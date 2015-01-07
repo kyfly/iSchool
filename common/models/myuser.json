@@ -7,6 +7,17 @@
     "type":{
       "type":"number",
       "require":true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "sex": {
+      "type": "number",
+      "required": true
+    },
+    "birthday": {
+      "type": "date"
     }
   },
   "validations": [],
