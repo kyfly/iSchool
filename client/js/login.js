@@ -8,7 +8,8 @@ login.controller('loginCtrl',['$scope','$http','$cookieStore', function ($scope,
 		};
 		$http.post('/api/myusers/login',this.credentials)
 		.success(function(data){
-			$cookieStore.put('access_token',data.id);
+			$cookieStore.put('accessToken',data.id);
+			$cookieStore.put('userId',data.userId)
 			window.location = '/index.html';
 		})
 		.error(function(){

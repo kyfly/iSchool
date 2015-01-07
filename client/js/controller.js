@@ -1,36 +1,35 @@
-function ChengjiCtrl ($scope,$resource,seva) {	
+function ChengjiCtrl ($scope,$resource,$cookieStore,seva) {	
 	var AllStudents = $resource(
-		"/students",
+		"/api/students",
 		{
-			access_token:"@access_token"
+			accessToken:"@accessToken"
 		}
 	);
 	var SingleStudent = $resource(
-		"/students/:stuId",
+		"/api/students/:stuId",
 		{
 			stuId:"@id",
-			access_token:"@access_token"
+			accessToken:"@accessToken"
 		}
 	);
 	var Subjects = $resource(
-		"/teachers/:teaId/subjects",
+		"/api/teachers/:teaId/subjects",
 		{
 			teaId:"@id",
-			access_token:"@access_token"
+			accessToken:"@accessToken"
 		}
 	);
 	var Grades = $resource(
-		"/students/:stuId/grades",
+		"/api/students/:stuId/grades",
 		{
 			stuId:"@id",
-			access_token:"@access_token"
+			accessToken:"@accessToken"
 		},
 		{
 			"upload":{
 				method:"POST",
 				params:{
-					score:"@score",
-					id:"@objectid"
+					score:"@score"
 				}
 			}
 		}
@@ -38,82 +37,81 @@ function ChengjiCtrl ($scope,$resource,seva) {
 	$scope.scoreSubmit = function() {
 		var postGrades = Grades.upload({
 			id:this.nowSelectedSno,
-			access_token:seva.access_token,
+			accessToken:$cookieStore.get('accessToken'),
 			data:{
 				score:this.uploadScore,
-				objectid:this.uploadObjectid
 			}
 		});
 	};
 	if (seva.usi === 0){
 		$scope.stulists = AllStudents.query({
-			access_token:seva.access_token
+			accessToken:$cookieStore.get('accessToken')
 		});
 		$scope.courselists = Subjects.query({
 			id:seva.whoami,
-			access_token:seva.access_token
+			accessToken:$cookieStore.get('accessToken')
 		});
 	}
 	else if (seva.usi === 1){
 		var SingleParent = $resource(
-			"/parents/:parId/student",
+			"/api/parents/:parId/student",
 			{
 				parId:"@id",
-				access_token:"@access_token"
+				accessToken:"@accessToken"
 			});
 		var parent = SingleParent.get({
 			id:whoami,
-			access_token:seva.access_token
+			accessToken:$cookieStore.get('accessToken')
 		});
 		$scope.stulists = [SingleStudent.get({
 			id:parent.id,
-			access_token:seva.access_token
+			accessToken:$cookieStore.get('accessToken')
 		})];
 	}
 	else {
 		$scope.stulists = [SingleStudent.get({
 			id:whoami,
-			access_token:seva.access_token
+			accessToken:$cookieStore.get('accessToken')
 		})];
 	}
 	$scope.grades = Grades.query({
 		id:this.nowSelectedSno,
-		access_token:seva.access_token
+		accessToken:$cookieStore.get('accessToken')
 	});
 	$scope.isTeacher = function(){
 		return seva.usi === 0;
 	};
 }
 
-function ZuoyeCtrl ($scope,$resource,seva) {
+function ZuoyeCtrl ($scope,$resource,$cookieStore,seva) {
 	var Homeworks = $resource(
-		"/teachers/:teaId/homeworks",
+		"/api/teachers/:teaId/homeworks",
 		{
 			teaId:"@id",
-			access_token:"@access_token"
+			accessToken:"@accessToken"
 		}
 	);
 	var Teachers = $resource(
-		"/teachers",
+		"/api/teachers",
 		{
 			filter:{
 				fields:{
 					id:true
 				}
 			},
-			access_token:"@access_token"
+			accessToken:"@accessToken"
 		}
 	);
 	$scope.teachers = Teachers.query();
 	$scope.homeworks = Homeworks.query({
 		id: 0,//this.teachers.id,
-		access_token:seva.access_token
+		accessToken:$cookieStore.get('accessToken')
 	});
 	$scope.homeworkSubmit = function () {
 		var nowDate = new Date();
 		var postHomework = Homeworks.save({
 			id: 0,//this.teachers.id,
-			access_token:seva.access_token,
+			accessToken:$cookieStore.get('accessToken'),
 			data:{
 				date:nowDate.toISOString(),
 				content:this.uploadContent
@@ -214,7 +212,7 @@ function HuodongCtrl ($scope,$resource,seva) {
 		"/teachers/:teaId/activities",
 		{
 			teaId:"@id",
-			access_token:"@access_token"
+			accessToken:"@accessToken"
 		}
 	);
 	$scope.activities = Activities.query();
