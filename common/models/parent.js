@@ -18,4 +18,34 @@ module.exports = function(Parent) {
             returns: {arg: 'messages', type: 'object'}
         }
     );
+
+	Parent.getAllParents = function(id, cb){
+		var myuser = Parent.app.models.myuser;
+		var parent = Parent.app.models.Parent;
+		Parent.find({
+		  include: {
+		    relation: 'belongToMyUser',
+		    scope: {
+		      fields: ['name']
+		    }
+		  }
+		},
+		function(err, parents){
+			var result = [];
+			for(var key in parents){
+				result[key] = {};
+				result[key].parent_id = parents[key].id;
+				result[key].name = parents[key].__data.belongToMyUser.name;
+			}
+			cb(null, result);
+		});
+	};
+
+	Parent.remoteMethod(
+		'getAllParents',
+		{
+			accepts: {arg: 'id', type:'number'},
+          	returns: {arg: 'parents', type: 'string'}
+		}
+	);
 };

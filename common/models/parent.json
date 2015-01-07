@@ -17,7 +17,7 @@
       "type": "hasMany",
       "model": "student",
       "foreignKey":"teacher_id"
-    },    
+    },
     "belongToMyUser": {
       "type": "belongsTo",
       "model": "myuser",
@@ -49,6 +49,13 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "parent",
+      "permission": "ALLOW"
+    },
+    {
+      "property":"getAllParents",
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
       "permission": "ALLOW"
     }
   ],
