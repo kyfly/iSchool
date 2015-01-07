@@ -1,12 +1,13 @@
 <!DOCTYPE>
-<html ng-app="app">
+<html ng-app="login">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css"/>
+	<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="/css/custom-style.css"/>
-	<script src="/lib/jquery/jquery-2.1.1.js"></script>
-	<script src="/lib/bootstrap/js/bootstrap.js"></script>
+	<script src="/lib/angular/angular.min.js"></script>
+	<script src="/lib/angular-components/angular-cookies.min.js"></script>
+	<script src="/js/login.js"></script>
 	<title>小学校园信息发布系统</title>
 	<!--[if lt IE 9]>
 	<script>
@@ -16,41 +17,39 @@
 	<![endif]-->
 </head>
 <body class="myft">
-<div class="container">
+<div class="container" ng-controller="signin">
 	<div class="text-center">
+		<br><br>
 		<h1><strong>小学校园信息发布系统</strong></h1>
 		<h3>用户登录</h3>
 	</div>
 	<hr>
 	<div class="col-md-offset-2 col-md-8 col-sm-12 well well-lg">
 		<form class="form-horizontal" role="form">
+			<br>
 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-4 control-label">帐号</label>
+				<label for="inputEmail" class="col-sm-4 control-label">帐号</label>
 				<div class="col-sm-6">
-					<input type="email" class="form-control" id="inputEmail3" placeholder="请输入您的帐号">
+					<input type="email" class="form-control" id="inputEmail" ng-model="inputEmail" placeholder="请输入您的帐号">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputPassword3" class="col-sm-4 control-label">密码</label>
+				<label for="inputPassword" class="col-sm-4 control-label">密码</label>
 				<div class="col-sm-6">
-					<input type="password" class="form-control" id="inputPassword3" placeholder="请输入密码">
+					<input type="password" class="form-control" id="inputPassword" ng-model="inputPassword" placeholder="请输入密码">
 				</div>
 			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-4 col-sm-6">
-					<div class="checkbox">
-						<label>
-							<input type="checkbox"> 记住密码
-						</label>
-					</div>
-				</div>
-			</div>
+			<br>
 			<div class="form-group">
 				<div class="col-sm-offset-4 col-sm-2">
-					<button type="submit" class="btn btn-primary btn-block">登录</button>
+					<button class="btn btn-primary btn-block" ng-click="login()">登录</button>
+				</div>
+				<div class="col-sm-2">
+					<button class="btn btn-warning btn-block" ng-click="redirectToSignup()">注册</button>
 				</div>
 			</div>
 		</form>
 	</div>
 </div>
 </body>
+</html>
