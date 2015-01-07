@@ -17,7 +17,7 @@
 	<![endif]-->
 </head>
 <body class="myft">
-<div class="container" ng-controller="signin">
+<div class="container" ng-controller="loginCtrl">
 	<div class="text-center">
 		<br><br>
 		<h1><strong>小学校园信息发布系统</strong></h1>
@@ -28,7 +28,7 @@
 		<form class="form-horizontal" role="form">
 			<br>
 			<div class="form-group">
-				<label for="inputEmail" class="col-sm-4 control-label">帐号</label>
+				<label for="inputEmail" class="col-sm-4 control-label">邮箱</label>
 				<div class="col-sm-6">
 					<input type="email" class="form-control" id="inputEmail" ng-model="inputEmail" placeholder="请输入您的帐号">
 				</div>
@@ -39,7 +39,6 @@
 					<input type="password" class="form-control" id="inputPassword" ng-model="inputPassword" placeholder="请输入密码">
 				</div>
 			</div>
-			<br>
 			<div class="form-group">
 				<div class="col-sm-offset-4 col-sm-2">
 					<button class="btn btn-primary btn-block" ng-click="login()">登录</button>

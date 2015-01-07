@@ -1,6 +1,6 @@
 var login = angular.module("login", ['ngCookies']);
 
-login.controller('signin',['$scope','$http','$cookieStore', function ($scope,$http,$cookieStore) {
+login.controller('loginCtrl',['$scope','$http','$cookieStore', function ($scope,$http,$cookieStore) {
 	$scope.login = function() {
 		this.credentials = {
 			email:this.inputEmail,
@@ -18,4 +18,4 @@ login.controller('signin',['$scope','$http','$cookieStore', function ($scope,$ht
 	$scope.redirectToSignup = function () {
 		window.location = '/signup.html';
 	}
-]);
+}]);
