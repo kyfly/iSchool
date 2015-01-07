@@ -20,13 +20,7 @@
     }
   },
   "validations": [],
-  "relations": {
-    "belongToParent": {
-      "type": "belongsTo",
-      "model": "parent",
-      "foreignKey": "par_id"
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": []
 }
