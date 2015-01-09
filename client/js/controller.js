@@ -1,155 +1,109 @@
-function ChengjiCtrl ($scope,seva) {
-	$scope.stulists = [
+function ChengjiCtrl ($scope,$resource,$cookieStore) {	
+	var AllStudents = $resource(
+		"/api/students",
 		{
-			"name":"哈哈哈",
-			"sno":"11111111"
-		},
-		{
-			"name":"呵呵呵",
-			"sno":"12434344"
-		},
-		{
-			"name":"尤振飞",
-			"sno":"16573456"
-		},
-		{
-			"name":"马越",
-			"sno":"12597377"
-		},
-		{
-			"name":"王如锵",
-			"sno":"12464883"
+			access_token:"@access_token"
 		}
-	];
-	$scope.courselists = [
+	);
+	var SingleStudent = $resource(
+		"/api/students/:stuId",
 		{
-			"cno":"0",
-			"name":"语文"
-		},
-		{
-			"cno":"1",
-			"name":"数学"
-		},
-		{
-			"cno":"2",
-			"name":"英语"
-		},
-		{
-			"cno":"3",
-			"name":"体育"
-		},
-		{
-			"cno":"4",
-			"name":"常识"
-		},
-		{
-			"cno":"5",
-			"name":"音乐"
-		},
-		{
-			"cno":"6",
-			"name":"美术"
+			stuId:"@id",
+			access_token:"@access_token"
 		}
-	];
-	$scope.grades = [
+	);
+	var Grades = $resource(
+		"/api/students/:stuId/grades",
 		{
-			"term":"一年级上期中",
-			"course":"语文",
-			"grade":"99"
+			stuId:"@id",
+			access_token:"@access_token"
 		},
 		{
-			"term":"一年级下期末",
-			"course":"数学",
-			"grade":"21"
-		},
-		{
-			"term":"二年级上期末",
-			"course":"英语",
-			"grade":"65"
-		},
-		{
-			"term":"二年级下期中",
-			"course":"体育",
-			"grade":"76"
-		},
-		{
-			"term":"三年级上期中",
-			"course":"美术",
-			"grade":"98"
-		},
-		{
-			"term":"三年级下期中",
-			"course":"音乐",
-			"grade":"97"
-		},
-		{
-			"term":"四年级上期末",
-			"course":"语文",
-			"grade":"66"
-		},
-		{
-			"term":"四年级下期末",
-			"course":"数学",
-			"grade":"73"
-		},
-		{
-			"term":"五年级上期中",
-			"course":"音乐",
-			"grade":"88"
-		},
-		{
-			"term":"五年级下期末",
-			"course":"美术",
-			"grade":"100"
-		},
-		{
-			"term":"六年级上期末",
-			"course":"英语",
-			"grade":"97"
-		},
-		{
-			"term":"六年级下期末",
-			"course":"语文",
-			"grade":"87"
+			"upload":{
+				method:"POST",
+				params:{
+					grade:"@grade"
+				}
+			}
 		}
-	];
+	);
+	$scope.gradeSubmit = function() {
+		var postGrades = Grades.upload({
+			id:this.nowSelectedSno,
+			access_token:$cookieStore.get('access_token'),
+			data:{
+				grade:this.uploadGrade,
+			}
+		});
+	};
+	if ($cookieStore.get('userType') === 0){
+		$scope.stulists = AllStudents.query({
+			access_token:$cookieStore.get('access_token')
+		});
+		$scope.courselists = [
+			"语文","数学","英语","科学","音乐","美术"
+		];
+	}
+	else if ($cookieStore.get('userType') === 1){
+		var SingleParent = $resource(
+			"/api/parents/:parId/student",
+			{
+				parId:"@id",
+				access_token:"@access_token"
+			});
+		var parent = SingleParent.get({
+			id:whoami,
+			access_token:$cookieStore.get('access_token')
+		});
+		$scope.stulists = [SingleStudent.get({
+			id:parent.id,
+			access_token:$cookieStore.get('access_token')
+		})];
+	}
+	else {
+		$scope.stulists = [SingleStudent.get({
+			id:whoami,
+			access_token:$cookieStore.get('access_token')
+		})];
+	}
+	$scope.grades = Grades.query({
+		id:this.nowSelectedSno,
+		access_token:$cookieStore.get('access_token')
+	});
 	$scope.isTeacher = function(){
-		return seva.usi === 0;
+		return $cookieStore.get('userType') === 0;
 	};
 }
 
-function ZuoyeCtrl ($scope,seva) {
-	$scope.homeworks = [
+function ZuoyeCtrl ($scope,$resource,$cookieStore) {
+	var Homeworks = $resource(
+		"/api/teachers/:id/homeworks",
 		{
-			"content":"今天没有作业！",
-			"from":"某个老师",
-			"datetime":"2014-06-06"
-		},
-		{
-			"content":"今天没有作业！今天没有作业！今天没有作业！今天没有作业！",
-			"from":"某个老师",
-			"datetime":"2015-06-06"
-		},
-		{
-			"content":"今天没有作业！今天没有作业！今天没有作业！",
-			"from":"某个老师",
-			"datetime":"2014-09-06"
-		},
-		{
-			"content":"今天没有作业！今天没有作业！",
-			"from":"某个老师",
-			"datetime":"2014-07-06"
+			id:$cookieStore.get("detailId"),
+			access_token:$cookieStore.get('access_token')
 		}
-	];
+	);
+	$scope.homeworks = Homeworks.query();
+	$scope.homeworkSubmit = function () {
+		var nowDate = new Date();
+		var postHomework = Homeworks.save({
+			date:nowDate.toISOString(),
+			content:this.uploadContent
+		});
+		this.homeworks.push({
+			date:nowDate.toISOString(),
+			content:this.uploadContent
+		});
+	}
 	$scope.isTeacher = function(){
-		return seva.usi === 0;
+		return $cookieStore.get('userType') === 0;
 	};
 	$scope.closeAlert = function(index) {
 		$scope.homeworks.splice(index, 1);
 	};
 }
 
-function KechengbiaoCtrl ($scope,seva) {
+function KechengbiaoCtrl ($scope,$cookieStore) {
 	$scope.courses = [
 		{
 			"mon":"语文",
@@ -225,128 +179,72 @@ function KechengbiaoCtrl ($scope,seva) {
 		}
 	];
 	$scope.isTeacher = function(){
-		return seva.usi === 0;
+		return $cookieStore.get('userType') === 0;
 	};
 
 }
 
-function JiazhanghuiCtrl ($scope,seva) {
-	$scope.meetings = [
+function HuodongCtrl ($scope,$resource,$cookieStore) {
+	var Activities = $resource(
+		"/api/teachers/:id/activities",
 		{
-			"content":"这是一个家长会",
-			"time":"2014-09-01",
-			"place":"六教",
-			"agree":"18",
-			"disagree":"21"
-		},
-		{
-			"content":"这也是一个家长会",
-			"time":"2014-09-02",
-			"place":"七教",
-			"agree":"39",
-			"disagree":"0"
-		},
-		{
-			"content":"这还是一个家长会",
-			"time":"2014-09-03",
-			"place":"一教",
-			"agree":"28",
-			"disagree":"11"
-		},
-	];
-	$scope.isTeacher = function() {
-		return seva.usi === 0;
-	};	
-	$scope.closeAlert = function(index) {
-		$scope.meetings.splice(index, 1);
-	};
-}
-function HuodongCtrl ($scope,seva) {
-	$scope.activities = [
-		{
-			"content":"这是一个活动！这是一个活动！这是一个活动！",
-			"time":"2014-09-01",
-			"place":"六教",
-			"from":"马越",
-			"datetime":"2014-03-01"
-		},
-		{
-			"content":"这是一个活动！这是一个活动！",
-			"time":"2014-01-01",
-			"place":"七教",
-			"from":"王如锵",
-			"datetime":"2014-04-01"
-		},
-		{
-			"content":"这是一个活动！",
-			"time":"2014-03-01",
-			"place":"学生活动中心",
-			"from":"尤振飞",
-			"datetime":"2014-02-01"
-		},
-		{
-			"content":"这是一个活动！这是一个活动！这是一个活动！",
-			"time":"2014-06-01",
-			"place":"行政楼",
-			"from":"啦啦啦",
-			"datetime":"2014-12-01"
-		},
-		{
-			"content":"这是一个活动！这是一个活动！",
-			"time":"2014-05-01",
-			"place":"体育馆",
-			"from":"呵呵呵",
-			"datetime":"2014-11-01"
+			id:$cookieStore.get("detailId"),
+			access_token:$cookieStore.get('access_token')
 		}
-	];
+	);
+	$scope.activities = Activities.query();
+	$scope.activitySubmit = function () {
+		var postActivity = Activities.save({
+			date:this.inputDate,
+			place:this.inputPlace,
+			content:this.inputContent
+		});
+		this.activities.push({
+			date:this.inputDate,
+			place:this.inputPlace,
+			content:this.inputContent
+		});
+	}
 	$scope.isTeacher = function(){
-		return seva.usi === 0;
+		var nowType = $cookieStore.get('userType');
+		return nowType === 0 || nowType === 1;
 	};
 	$scope.closeAlert = function(index) {
 		$scope.activities.splice(index, 1);
 	};
 }
 
-function ZiliaoCtrl ($scope,seva) {
-	$scope.personinfos = [
+function ZiliaoCtrl ($scope,$resource,$cookieStore) {
+	var Profiles = $resource(
+		"/api/myusers/:id",
 		{
-			"name":"哈哈",
-			"sex":"男",
-			"birthday":"1994-02-02",
-			"job":"学生",
-			"contact":"13666666666"
+			id:$cookieStore.get('userId'),
+			access_token:$cookieStore.get('access_token')
 		},
 		{
-			"name":"呵呵",
-			"sex":"女",
-			"birthday":"1995-03-03",
-			"job":"老师",
-			"contact":"12345678910"
-		},
-		{
-			"name":"啦啦",
-			"sex":"女",
-			"birthday":"1993-01-01",
-			"job":"家长",
-			"contact":"15444444444"
-		},
-		{
-			"name":"呜呜",
-			"sex":"男",
-			"birthday":"1996-06-06",
-			"job":"学生",
-			"contact":"11111111111"
-		},
-	];
-	$scope.isTeacher = function(){
-		return seva.usi === 0;
-	};
-	$scope.closeAlert = function(index) {
-		$scope.personinfos.splice(index, 1);
-	};
+			update:{
+				method:'PUT',
+				success:function(){
+					alert("成功！");
+				},
+				error:function(){
+					alert("失败！");
+				}
+			}
+		}
+	);
+	$scope.profiles = Profiles.get();
+	$scope.updateProfile = function () {
+		var updatePf = Profiles.update({
+			sex:this.profiles.sex,
+			name:this.profiles.name,
+			email:this.profiles.email
+		});
+	}
 }
 
-function LiuyanCtrl ($scope,seva) {
+function LiuyanCtrl ($scope,$cookieStore) {
+	
 	$scope.comments = [
 		{
 			"from":"马越",
@@ -374,55 +272,42 @@ function LiuyanCtrl ($scope,seva) {
 		}
 	];
 	$scope.isTeacher = function(){
-		return seva.usi === 0;
+		return $cookieStore.get('userType') === 0;
 	};
 	$scope.closeAlert = function(index) {
 		$scope.comments.splice(index, 1);
 	};
 }
 
-function TongzhiCtrl ($scope,seva) {
-	$scope.notices = [
+function TongzhiCtrl ($scope,$resource,$cookieStore) {
+	var Notices = $resource(
+		"/api/teachers/:id/notices",
 		{
-			"content":"这是一条通知！这是一条通知！这是一条通知！",
-			"from":"马越",
-			"datetime":"2014-03-01",
-			"type":"info"
-		},
-		{
-			"content":"这是一条通知！这是一条通知！",
-			"from":"王如锵",
-			"datetime":"2014-04-01",
-			"type":"success"
-		},
-		{
-			"content":"这是一条通知！",
-			"from":"尤振飞",
-			"datetime":"2014-02-01",
-			"type":"warning"
-		},
-		{
-			"content":"这是一条通知！这是一条通知！这是一条通知！",
-			"from":"哈哈哈",
-			"datetime":"2014-12-01",
-			"type":"danger"
-		},
-		{
-			"content":"这是一条通知！这是一条通知！",
-			"from":"啦啦啦",
-			"datetime":"2014-11-01",
-			"type":"info"
+			id:$cookieStore.get("detailId"),
+			access_token:$cookieStore.get('access_token')
 		}
-	];
+	);
+	$scope.notices = Notices.query();
+	$scope.noticeSubmit = function () {
+		var nowDate = new Date();
+		var postNotices = Notices.save({
+			date:nowDate.toISOString(),
+			content:this.inputContent
+		});
+		this.notices.push({
+			date:nowDate.toISOString(),
+			content:this.inputContent
+		});
+	}
 	$scope.isTeacher = function(){
-		return seva.usi === 0;
+		return $cookieStore.get('userType') === 0;
 	};
 	$scope.closeAlert = function(index) {
 		$scope.notices.splice(index, 1);
 	};
 }
 
-function SidebarCtrl($scope,seva,$window){
+function SidebarCtrl($scope,$cookieStore,$window){
 	var sidebarResource = [
 		//教师边栏
 		[
@@ -442,19 +327,9 @@ function SidebarCtrl($scope,seva,$window){
 				"url":"#/kechengbiao",
 			},
 			{
-				"id":"sidebarJiazhanghui",
-				"display_name":"家长会管理",
-				"url":"#/jiazhanghui"
-			},
-			{
 				"id":"sidebarHuodong",
 				"display_name":"活动管理",
 				"url":"#/huodong"
-			},
-			{
-				"id":"sidebarZiliao",
-				"display_name":"资料管理",
-				"url":"#/ziliao"
 			},
 			{
 				"id":"sidebarLiuyan",
@@ -465,6 +340,11 @@ function SidebarCtrl($scope,seva,$window){
 				"id":"sidebarTongzhi",
 				"display_name":"通知管理",
 				"url":"#/tongzhi"
+			},
+			{
+				"id":"sidebarZiliao",
+				"display_name":"我的资料",
+				"url":"#/ziliao"
 			}
 		],
 		//家长边栏
@@ -485,11 +365,6 @@ function SidebarCtrl($scope,seva,$window){
 				"url":"#/kechengbiao",
 			},
 			{
-				"id":"sidebarJiazhanghui",
-				"display_name":"查看家长会",
-				"url":"#/jiazhanghui"
-			},
-			{
 				"id":"sidebarHuodong",
 				"display_name":"查看活动",
 				"url":"#/huodong"
@@ -503,6 +378,11 @@ function SidebarCtrl($scope,seva,$window){
 				"id":"sidebarTongzhi",
 				"display_name":"查看通知",
 				"url":"#/tongzhi"
+			},
+			{
+				"id":"sidebarZiliao",
+				"display_name":"我的资料",
+				"url":"#/ziliao"
 			}
 		],
 		//学生边栏
@@ -528,37 +408,41 @@ function SidebarCtrl($scope,seva,$window){
 				"url":"#/huodong"
 			},
 			{
-				"id":"sidebarLiuyan",
-				"display_name":"留言系统",
-				"url":"#/liuyan"
-			},
-			{
 				"id":"sidebarTongzhi",
 				"display_name":"查看通知",
 				"url":"#/tongzhi"
+			},
+			{
+				"id":"sidebarZiliao",
+				"display_name":"我的资料",
+				"url":"#/ziliao"
 			}
 		]
 	];
-	$scope.sidebars = sidebarResource[seva.usi];
+	$scope.sidebars = sidebarResource[$cookieStore.get('userType')];
 	$scope.redirect = function(href) {
 		$window.location.href = href;
 	}
 
 }
 
-function NavbarCtrl($scope,seva){
+function NavbarCtrl($scope,$cookieStore,$http){
 	var role = ["教师","家长","学生"];
 	$scope.user = {
-		"name":"用户名",
-		"role":role[seva.usi],
-		"switchuser":function(){
-			seva.usi++;
-			if(seva.usi >= 3){
-				seva.usi = 0;
-			}
-			$scope.user.role = role[seva.usi];
-		}
+		"name":$cookieStore.get('userName'),
+		"role":role[$cookieStore.get('userType')]
 	};
+	$scope.logout = function(){
+		$http.post("/api/myusers/logout?access_token="+$cookieStore.get('access_token'))
+		.success(function(){
+			$cookieStore.remove('userId');
+			$cookieStore.remove('userType');
+			$cookieStore.remove('userName');
+			$cookieStore.remove('detailId');
+			$cookieStore.remove('access_token');
+			window.location = "/login.html";
+		});
+	}
 }
 
 
@@ -575,10 +459,6 @@ function PageLoader($routeProvider){
 		.when('/kechengbiao',{
 			templateUrl:'/views/kechengbiao.html',
 			controller: KechengbiaoCtrl,
-		})
-		.when('/jiazhanghui',{
-			templateUrl:'/views/jiazhanghui.html',
-			controller: JiazhanghuiCtrl,
 		})
 		.when('/huodong',{
 			templateUrl:'/views/huodong.html',

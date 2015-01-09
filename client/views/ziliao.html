@@ -1,36 +1,31 @@
 <tabset>
-	<tab heading="添加资料" disabled="!isTeacher()">
+	<tab heading="编辑资料">
 		<br>
 		<form>
 			<div class="form-group">
 				<label class="control-label">姓名：</label>
-		   	  	<input type="text" class="form-control" id="" placeholder="">
+		   	  	<input type="text" class="form-control" id="inputName" ng-model="profiles.name" placeholder="请输入您的姓名">
 			</div>
 			<div class="form-group">
 				<label class="control-label">性别：</label>
-		   	  	<input type="text" class="form-control" id="" placeholder="">
+					<select class="form-control" id="inputSex" ng-model="profiles.sex" >
+						<option value="1">男</option>
+						<option value="2">女</option>
+					</select>
 			</div>
 			<div class="form-group">
-				<label class="control-label">生日：</label>
-		   	  	<input type="text" class="form-control" id="" placeholder="">
-			</div>
-			<div class="form-group">
-				<label class="control-label">职业：</label>
-		   	  	<input type="text" class="form-control" id="" placeholder="">
-			</div>
-			<div class="form-group">
-				<label class="control-label">联系信息：</label>
-		   	  	<input type="text" class="form-control" id="" placeholder="">
+				<label class="control-label">电子邮箱：</label>
+		   	  	<input type="text" class="form-control" id="inputEmail" ng-model="profiles.email" placeholder="请输入您的电子邮箱">
 			</div>
 			<div class="form-group text-right">
-				<button type="button" class="btn btn-primary">
+				<button type="button" class="btn btn-primary" ng-click="updateProfile()">
 					<span class="glyphicon glyphicon-user"></span>
-					&nbsp;添加人员
+					&nbsp;更新资料
 				</button>
 			</div>
 		</form>
 	</tab>
-	<tab heading="查看资料">
+	<tab heading="查看资料"  ng-show="false">
 		<br>
 		<div class="input-group">
 			<span class="input-group-addon">
